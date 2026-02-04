@@ -24,8 +24,7 @@ if kerangka_file is not None:
 
     kerangka_teks = "\n".join(isi_kerangka)
 
- st.subheader("🔍 Preview Kerangka RPP")
-
+st.subheader("🔍 Preview Kerangka RPP")
 st.text_area(
     "Isi kerangka hasil baca:",
     kerangka_teks,
