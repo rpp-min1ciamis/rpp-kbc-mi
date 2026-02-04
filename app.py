@@ -48,7 +48,7 @@ if st.button("Generate Struktur RPP"):
     rpp = f"""
 A. JUDUL
 PERENCANAAN PEMBELAJARAN
-Materi Pokok: {materi}
+Materi Pokok: {materi_pokok}
 
 B. IDENTITAS
 Nama Madrasah   : {madrasah}
