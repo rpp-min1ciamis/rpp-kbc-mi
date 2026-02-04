@@ -24,9 +24,13 @@ if kerangka_file is not None:
 
     kerangka_teks = "\n".join(isi_kerangka)
 
-    st.subheader("📑 Isi Kerangka RPP")
-    for baris in isi_kerangka:
-        st.write(baris)
+ st.subheader("🔍 Preview Kerangka RPP")
+
+st.text_area(
+    "Isi kerangka hasil baca:",
+    kerangka_teks,
+    height=300
+)
 
 st.subheader("MI Negeri 1 Ciamis")
 
