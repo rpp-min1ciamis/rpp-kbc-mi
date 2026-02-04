@@ -43,3 +43,55 @@ if submit:
     st.write("**Alokasi Waktu:**", alokasi_waktu)
     st.write("**Tahun Pelajaran:**", tahun_pelajaran)
     st.write("**Model Pedagogis:**", model_pedagogis)
+
+if st.button("Generate Struktur RPP"):
+    rpp = f"""
+A. JUDUL
+PERENCANAAN PEMBELAJARAN
+Materi Pokok: {materi}
+
+B. IDENTITAS
+Nama Madrasah   : {madrasah}
+Nama Guru       : ____________________
+Mata Pelajaran  : {mapel}
+Materi Pokok    : {materi}
+Kelas / Semester: {kelas}
+Alokasi Waktu   : {waktu}
+Tahun Pelajaran : {tahun}
+Model Pedagogis : {model}
+
+C. IDENTIFIKASI
+Kesiapan Murid               :
+Dimensi Profil Lulusan (DPL) :
+Topik Kurikulum Berbasis Cinta (KBC) :
+Materi Insersi KBC           :
+
+D. DESAIN PEMBELAJARAN
+Capaian Pembelajaran :
+Lintas Disiplin Ilmu :
+Tujuan Pembelajaran :
+Praktik Pedagogis :
+Kemitraan Pembelajaran :
+Lingkungan Pembelajaran :
+Pemanfaatan Digital :
+
+E. PENGALAMAN BELAJAR
+Pertemuan ke- ...
+1. Kegiatan Awal
+2. Kegiatan Inti
+   - Memahami
+   - Mengaplikasi
+   - Merefleksi
+3. Kegiatan Penutup
+
+F. ASESMEN PEMBELAJARAN
+Asesmen Awal :
+Asesmen Proses :
+Asesmen Akhir :
+
+G. LAMPIRAN
+1. Rubrik Penilaian
+2. LKPD
+3. Asesmen Akhir
+"""
+    st.text_area("Hasil Struktur RPP", rpp, height=500)
