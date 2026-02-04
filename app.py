@@ -22,7 +22,7 @@ if kerangka_file is not None:
         if p.text.strip():
             isi_kerangka.append(p.text.strip())
 
-    kerangka_teks = "\n".join(isi_kerangka)
+kerangka_teks = "\n".join(isi_kerangka)
 
 st.subheader("🔍 Preview Kerangka RPP")
 st.text_area(
