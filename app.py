@@ -18,9 +18,11 @@ if kerangka_file is not None:
     doc = Document(kerangka_file)
     isi_kerangka = []
 
-    for paragraf in doc.paragraphs:
-        if paragraf.text.strip() != "":
-            isi_kerangka.append(paragraf.text)
+    for p in doc.paragraphs:
+        if p.text.strip():
+            isi_kerangka.append(p.text.strip())
+
+    kerangka_teks = "\n".join(isi_kerangka)
 
     st.subheader("📑 Isi Kerangka RPP")
     for baris in isi_kerangka:
