@@ -51,14 +51,14 @@ PERENCANAAN PEMBELAJARAN
 Materi Pokok: {materi_pokok}
 
 B. IDENTITAS
-Nama Madrasah   : {madrasah}
+Nama Madrasah   : {nama_madrasah}
 Nama Guru       : ____________________
-Mata Pelajaran  : {mapel}
-Materi Pokok    : {materi}
-Kelas / Semester: {kelas}
-Alokasi Waktu   : {waktu}
-Tahun Pelajaran : {tahun}
-Model Pedagogis : {model}
+Mata Pelajaran  : {mata_pelajaran}
+Materi Pokok    : {materi_pokok}
+Kelas / Semester: {kelas_semester}
+Alokasi Waktu   : {alokasi_waktu}
+Tahun Pelajaran : {tahun_pelajaran}
+Model Pedagogis : {model_pedagogis}
 
 C. IDENTIFIKASI
 Kesiapan Murid               :
