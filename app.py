@@ -7,6 +7,13 @@ st.set_page_config(
 )
 
 st.title("📘 Generator RPP Kurikulum Berbasis Cinta")
+st.subheader("📄 Upload Kerangka RPP")
+
+kerangka_file = st.file_uploader(
+    "Upload file kerangka RPP (format .docx)",
+    type=["docx"]
+)
+
 st.subheader("MI Negeri 1 Ciamis")
 
 st.success("Aplikasi berhasil dijalankan 🎉")
