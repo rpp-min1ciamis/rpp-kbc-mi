@@ -1,4 +1,5 @@
 import streamlit as st
+from docx import Document
 
 st.set_page_config(
     page_title="Generator RPP KBC MI",
@@ -13,6 +14,17 @@ kerangka_file = st.file_uploader(
     "Upload file kerangka RPP (format .docx)",
     type=["docx"]
 )
+if kerangka_file is not None:
+    doc = Document(kerangka_file)
+    isi_kerangka = []
+
+    for paragraf in doc.paragraphs:
+        if paragraf.text.strip() != "":
+            isi_kerangka.append(paragraf.text)
+
+    st.subheader("📑 Isi Kerangka RPP")
+    for baris in isi_kerangka:
+        st.write(baris)
 
 st.subheader("MI Negeri 1 Ciamis")
 
