@@ -67,19 +67,6 @@ C. Kerangka RPP
         height=400
     )
 
-for p in doc.paragraphs:
-    if p.text.strip():
-        isi_kerangka.append(p.text.strip())
-
-    kerangka_teks = "\n".join(isi_kerangka)
-
-    st.subheader("🔍 Preview Kerangka RPP")
-    st.text_area(
-        "Isi kerangka hasil baca:",
-        kerangka_teks,
-        height=300
-)
-
 st.subheader("MI Negeri 1 Ciamis")
 
 st.success("Aplikasi berhasil dijalankan 🎉")
