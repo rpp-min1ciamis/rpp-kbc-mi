@@ -17,6 +17,31 @@ kerangka_file = st.file_uploader(
 if kerangka_file is not None:
     doc = Document(kerangka_file)
     isi_kerangka = []
+st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
+
+struktur_rpp = f"""
+PERENCANAAN PEMBELAJARAN
+
+A. Identitas
+Nama Madrasah   : {nama_madrasah}
+Mata Pelajaran  : {mata_pelajaran}
+Kelas/Semester  : {kelas_semester}
+Tahun Pelajaran : {tahun_pelajaran}
+
+B. Informasi Umum
+Materi Pokok    : {materi_pokok}
+Alokasi Waktu   : {alokasi_waktu}
+Model Pedagogis : {model_pedagogis}
+
+C. Kerangka RPP
+{kerangka_teks}
+"""
+
+st.text_area(
+    "Draft Struktur RPP:",
+    struktur_rpp,
+    height=400
+)
 
     for p in doc.paragraphs:
         if p.text.strip():
