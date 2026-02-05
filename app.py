@@ -43,9 +43,9 @@ st.text_area(
     height=400
 )
 
-    for p in doc.paragraphs:
-        if p.text.strip():
-            isi_kerangka.append(p.text.strip())
+for p in doc.paragraphs:
+    if p.text.strip():
+        isi_kerangka.append(p.text.strip())
 
     kerangka_teks = "\n".join(isi_kerangka)
 
