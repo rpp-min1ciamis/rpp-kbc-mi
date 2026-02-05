@@ -25,9 +25,21 @@ kerangka_file = st.file_uploader(
 if kerangka_file is not None:
     doc = Document(kerangka_file)
     isi_kerangka = []
-st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
+    for p in doc.paragraphs:
+        if p.text.strip():
+            isi_kerangka.append(p.text.strip())
 
-struktur_rpp = f"""
+    kerangka_teks = "\n".join(isi_kerangka)
+    
+    st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
+    st.text_area(
+        "Isi kerangka hasil baca:",
+        kerangka_teks,
+        height=300
+    )
+    st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
+    
+    struktur_rpp = f"""
 PERENCANAAN PEMBELAJARAN
 
 A. Identitas
@@ -45,10 +57,10 @@ C. Kerangka RPP
 {kerangka_teks}
 """
 
-st.text_area(
-    "Draft Struktur RPP:",
-    struktur_rpp,
-    height=400
+    st.text_area(
+        "Draft Struktur RPP:",
+        struktur_rpp,
+        height=400
 )
 
 for p in doc.paragraphs:
