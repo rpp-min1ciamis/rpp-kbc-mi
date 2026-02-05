@@ -22,24 +22,27 @@ kerangka_file = st.file_uploader(
     "Upload file kerangka RPP (format .docx)",
     type=["docx"]
 )
+kerangka_teks = ""  # default aman
+
 if kerangka_file is not None:
     doc = Document(kerangka_file)
-    
+
     isi_kerangka = []
     for p in doc.paragraphs:
         if p.text.strip():
             isi_kerangka.append(p.text.strip())
 
     kerangka_teks = "\n".join(isi_kerangka)
-    
+
     st.subheader("🔍 Preview Kerangka RPP")
     st.text_area(
         "Isi kerangka hasil baca:",
         kerangka_teks,
         height=300
     )
+
     st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
-    
+
     struktur_rpp = f"""
 PERENCANAAN PEMBELAJARAN
 
@@ -62,7 +65,7 @@ C. Kerangka RPP
         "Draft Struktur RPP:",
         struktur_rpp,
         height=400
-)
+    )
 
 for p in doc.paragraphs:
     if p.text.strip():
