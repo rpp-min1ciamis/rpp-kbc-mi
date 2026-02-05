@@ -45,11 +45,11 @@ C. Kerangka RPP
 {kerangka_teks}
 """
 
-    st.text_area(
-        "Draft Struktur RPP:",
-        struktur_rpp,
-        height=400
-    )
+st.text_area(
+    "Draft Struktur RPP:",
+    struktur_rpp,
+    height=400
+)
 
 for p in doc.paragraphs:
     if p.text.strip():
