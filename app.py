@@ -24,6 +24,7 @@ kerangka_file = st.file_uploader(
 )
 if kerangka_file is not None:
     doc = Document(kerangka_file)
+    
     isi_kerangka = []
     for p in doc.paragraphs:
         if p.text.strip():
@@ -31,7 +32,7 @@ if kerangka_file is not None:
 
     kerangka_teks = "\n".join(isi_kerangka)
     
-    st.subheader("📘 Struktur RPP (Versi Kemenag – Draft)")
+    st.subheader("🔍 Preview Kerangka RPP")
     st.text_area(
         "Isi kerangka hasil baca:",
         kerangka_teks,
