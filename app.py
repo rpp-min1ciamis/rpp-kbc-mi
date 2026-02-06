@@ -131,24 +131,35 @@ st.markdown("---")
 st.caption("© 2026 • Generator RPP KBC • MIN 1 Ciamis")
 
 # ==============================
-# HALAMAN PREVIEW
+# HALAMAN PREVIEW (FIX)
 # ==============================
 elif st.session_state.page == "preview":
 
+    # AMAN: cek heula data aya atawa henteu
+    if "data" not in st.session_state or not st.session_state.data:
+        st.error("❌ Data RPP belum tersedia. Silakan isi form terlebih dahulu.")
+        if st.button("⬅️ Kembali ke Form Input"):
+            st.session_state.page = "input"
+            st.rerun()
+        st.stop()
+
     data = st.session_state.data
 
-    st.title("🔍 Preview & Generate RPP")
+    st.title("🔍 Preview Data RPP")
+    st.caption("Periksa kembali sebelum generate struktur RPP")
 
-    st.subheader("📌 Identitas")
-    st.write("**Nama Madrasah:**", data["nama_madrasah"])
-    st.write("**Mata Pelajaran:**", data["mata_pelajaran"])
-    st.write("**Materi Pokok:**", data["materi_pokok"])
-    st.write("**Kelas / Semester:**", data["kelas_semester"])
-    st.write("**Alokasi Waktu:**", data["alokasi_waktu"])
-    st.write("**Tahun Pelajaran:**", data["tahun_pelajaran"])
-    st.write("**Model Pedagogis:**", data["model_pedagogis"])
+    st.markdown("---")
 
-    if data["kerangka_teks"]:
+    st.subheader("📌 Identitas RPP")
+    st.write("**Nama Madrasah:**", data.get("nama_madrasah", "-"))
+    st.write("**Mata Pelajaran:**", data.get("mata_pelajaran", "-"))
+    st.write("**Materi Pokok:**", data.get("materi_pokok", "-"))
+    st.write("**Kelas / Semester:**", data.get("kelas_semester", "-"))
+    st.write("**Alokasi Waktu:**", data.get("alokasi_waktu", "-"))
+    st.write("**Tahun Pelajaran:**", data.get("tahun_pelajaran", "-"))
+    st.write("**Model Pedagogis:**", data.get("model_pedagogis", "-"))
+
+    if data.get("kerangka_teks"):
         st.subheader("📄 Kerangka RPP")
         st.text_area(
             "Isi Kerangka:",
@@ -156,8 +167,20 @@ elif st.session_state.page == "preview":
             height=250
         )
 
-    if st.button("🧾 Generate Struktur RPP"):
-        rpp = f"""
+    st.markdown("---")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("🧾 Generate Struktur RPP"):
+            st.session_state.page = "generate"
+            st.rerun()
+
+    with col2:
+        if st.button("⬅️ Kembali ke Input"):
+            st.session_state.page = "input"
+            st.rerun()
+
 PERENCANAAN PEMBELAJARAN
 
 A. IDENTITAS
