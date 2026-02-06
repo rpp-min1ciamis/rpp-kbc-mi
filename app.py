@@ -86,61 +86,16 @@ st.set_page_config(
 # ==============================
 # HALAMAN INPUT
 # ==============================
-if st.session_state.page == "input":
+st.markdown("""
+<div style="background:#198754;padding:18px;border-radius:12px">
+    <h2 style="color:white;margin:0">📘 Generator RPP Digital</h2>
+    <p style="color:#d1e7dd;margin:0">
+        MI Negeri 1 Ciamis — Kurikulum Berbasis Cinta
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-    st.title("📘 Generator RPP Kurikulum Berbasis Cinta")
-    st.subheader("📝 Identitas RPP")
-
-    with st.form("form_rpp"):
-        nama_madrasah = st.text_input("Nama Madrasah")
-        mata_pelajaran = st.text_input("Mata Pelajaran")
-        materi_pokok = st.text_input("Materi Pokok")
-        kelas_semester = st.text_input("Kelas / Semester")
-        alokasi_waktu = st.text_input("Alokasi Waktu")
-        tahun_pelajaran = st.text_input("Tahun Pelajaran")
-        model_pedagogis = st.selectbox(
-            "Model Pedagogis",
-            [
-                "Discovery Learning",
-                "Problem Based Learning (PBL)",
-                "Project Based Learning (PjBL)",
-                "Inquiry Learning",
-                "Pembelajaran Mendalam (Deep Learning)"
-            ]
-        )
-
-        kerangka_file = st.file_uploader(
-            "Upload file kerangka RPP (.docx)",
-            type=["docx"]
-        )
-
-        submit = st.form_submit_button("🚀 Simpan & Lanjutkan")
-
-    if submit:
-        kerangka_teks = ""
-
-        if kerangka_file is not None:
-            doc = Document(kerangka_file)
-            isi = [p.text.strip() for p in doc.paragraphs if p.text.strip()]
-            kerangka_teks = "\n".join(isi)
-
-        st.session_state.data = {
-            "nama_madrasah": nama_madrasah,
-            "mata_pelajaran": mata_pelajaran,
-            "materi_pokok": materi_pokok,
-            "kelas_semester": kelas_semester,
-            "alokasi_waktu": alokasi_waktu,
-            "tahun_pelajaran": tahun_pelajaran,
-            "model_pedagogis": model_pedagogis,
-            "kerangka_teks": kerangka_teks
-        }
-
-        st.session_state.page = "preview"
-        st.rerun()
-
-    st.success("Aplikasi berhasil dijalankan 🎉")
-    st.caption("MI Negeri 1 Ciamis")
-
+st.markdown("<br>", unsafe_allow_html=True)
 # ==============================
 # HALAMAN PREVIEW
 # ==============================
