@@ -9,22 +9,29 @@ if "page" not in st.session_state:
 # ==============================
 if st.session_state.page == "input":
     st.title("📘 Generator RPP Kurikulum Berbasis Cinta")
-    st.subheader("📝 Form Input Data RPP")
-    
-st.subheader("📝 Identitas RPP")
+    st.subheader("📝 Identitas RPP")
 
-nama_madrasah = st.text_input("Nama Madrasah")
-mata_pelajaran = st.text_input("Mata Pelajaran")
-materi_pokok = st.text_input("Materi Pokok")
-kelas_semester = st.text_input("Kelas / Semester")
-alokasi_waktu = st.text_input("Alokasi Waktu")
-tahun_pelajaran = st.text_input("Tahun Pelajaran")
-model_pedagogis = st.text_input("Model Pedagogis")
+    nama_madrasah = st.text_input("Nama Madrasah")
+    mata_pelajaran = st.text_input("Mata Pelajaran")
+    materi_pokok = st.text_input("Materi Pokok")
+    kelas_semester = st.text_input("Kelas / Semester")
+    alokasi_waktu = st.text_input("Alokasi Waktu")
+    tahun_pelajaran = st.text_input("Tahun Pelajaran")
+    model_pedagogis = st.selectbox(
+        "Model Pedagogis",
+        [
+            "Discovery Learning",
+            "Problem Based Learning (PBL)",
+            "Project Based Learning (PjBL)",
+            "Inquiry Learning",
+            "Pembelajaran Mendalam (Deep Learning)"
+        ]
+    )
 
-kerangka_file = st.file_uploader(
-    "Upload file kerangka RPP (format .docx)",
-    type=["docx"]
-)
+    kerangka_file = st.file_uploader(
+        "Upload file kerangka RPP (format .docx)",
+        type=["docx"]
+    )
 
 st.set_page_config(
     page_title="Generator RPP KBC MI",
