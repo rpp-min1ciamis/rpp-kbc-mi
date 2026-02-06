@@ -4,6 +4,13 @@ from docx import Document
 if "page" not in st.session_state:
     st.session_state.page = "input"
     
+# ==============================
+# PAGE : INPUT
+# ==============================
+if st.session_state.page == "input":
+    st.title("📘 Generator RPP Kurikulum Berbasis Cinta")
+    st.subheader("📝 Form Input Data RPP")
+
 st.set_page_config(
     page_title="Generator RPP KBC MI",
     page_icon="📘",
