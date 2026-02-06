@@ -39,10 +39,6 @@ st.set_page_config(
     layout="centered"
 )
 
-kerangka_file = st.file_uploader(
-    "Upload file kerangka RPP (format .docx)",
-    type=["docx"]
-)
 kerangka_teks = ""  # default aman
 
 if kerangka_file is not None:
