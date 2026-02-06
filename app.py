@@ -10,17 +10,6 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("📘 Generator RPP Kurikulum Berbasis Cinta")
-st.subheader("📝 Identitas RPP")
-
-nama_madrasah = st.text_input("Nama Madrasah")
-mata_pelajaran = st.text_input("Mata Pelajaran")
-materi_pokok = st.text_input("Materi Pokok")
-kelas_semester = st.text_input("Kelas / Semester")
-alokasi_waktu = st.text_input("Alokasi Waktu")
-tahun_pelajaran = st.text_input("Tahun Pelajaran")
-model_pedagogis = st.text_input("Model Pedagogis")
-
 kerangka_file = st.file_uploader(
     "Upload file kerangka RPP (format .docx)",
     type=["docx"]
