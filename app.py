@@ -27,7 +27,18 @@ if st.session_state.page == "input":
             "Pembelajaran Mendalam (Deep Learning)"
         ]
     )
+    submit = st.form_submit_button("🚀 Simpan & Lanjutkan")
 
+    if submit:
+        st.markdown("### ✅ Data berhasil diinput")
+        st.write("**Nama Madrasah:**", nama_madrasah)
+        st.write("**Mata Pelajaran:**", mata_pelajaran)
+        st.write("**Materi Pokok:**", materi_pokok)
+        st.write("**Kelas / Semester:**", kelas_semester)
+        st.write("**Alokasi Waktu:**", alokasi_waktu)
+        st.write("**Tahun Pelajaran:**", tahun_pelajaran)
+        st.write("**Model Pedagogis:**", model_pedagogis)
+        
     kerangka_file = st.file_uploader(
         "Upload file kerangka RPP (format .docx)",
         type=["docx"]
@@ -87,16 +98,6 @@ C. Kerangka RPP
 st.subheader("MI Negeri 1 Ciamis")
 
 st.success("Aplikasi berhasil dijalankan 🎉")
-
-if submit:
-    st.markdown("### ✅ Data berhasil diinput")
-    st.write("**Nama Madrasah:**", nama_madrasah)
-    st.write("**Mata Pelajaran:**", mata_pelajaran)
-    st.write("**Materi Pokok:**", materi_pokok)
-    st.write("**Kelas / Semester:**", kelas_semester)
-    st.write("**Alokasi Waktu:**", alokasi_waktu)
-    st.write("**Tahun Pelajaran:**", tahun_pelajaran)
-    st.write("**Model Pedagogis:**", model_pedagogis)
 
 if st.button("Generate Struktur RPP"):
     rpp = f"""
