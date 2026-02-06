@@ -181,54 +181,50 @@ elif st.session_state.page == "preview":
             st.session_state.page = "input"
             st.rerun()
 
+if st.button("🧾 Generate Struktur RPP"):
+
+    rpp = f"""
 PERENCANAAN PEMBELAJARAN
 
 A. IDENTITAS
-Nama Madrasah   : {data['nama_madrasah']}
-Mata Pelajaran  : {data['mata_pelajaran']}
-Kelas/Semester  : {data['kelas_semester']}
-Materi Pokok    : {data['materi_pokok']}
-Alokasi Waktu   : {data['alokasi_waktu']}
-Tahun Pelajaran : {data['tahun_pelajaran']}
-Model Pedagogis : {data['model_pedagogis']}
+Nama Madrasah   : {data.get('nama_madrasah', '')}
+Mata Pelajaran  : {data.get('mata_pelajaran', '')}
+Kelas/Semester  : {data.get('kelas_semester', '')}
+Materi Pokok    : {data.get('materi_pokok', '')}
+Alokasi Waktu   : {data.get('alokasi_waktu', '')}
+Tahun Pelajaran : {data.get('tahun_pelajaran', '')}
+Model Pedagogis : {data.get('model_pedagogis', '')}
 
 B. IDENTIFIKASI
-    1.	Kesiapan Murid
-    2.	Dimensi Profil Lulusan (DPL)
-    3.	Topik Kurikulum Berbasis Cinta (KBC)
-    4.	Materi Insersi Kurikulum Berbasis Cinta (KBC)
+1. Kesiapan Murid
+2. Dimensi Profil Lulusan (DPL)
+3. Topik Kurikulum Berbasis Cinta (KBC)
+4. Materi Insersi KBC
 
 C. DESAIN PEMBELAJARAN
-    1.	Capaian Pembelajaran
-    2.	Lintas Disiplin Ilmu
-    3.	Tujuan Pembelajaran
-    4.	Praktik Pedagogis
-    5.	Kemitraan Pembelajaran
-    6.	Lingkungan Pembelajaran
-    7.	Pemanfaatan Digital
-    
-D. PENGALAMAN BELAJAR
-Langkah-langkah Pembelajaran:
-    Pertemuan Ke-....
-    1. Kegiatan Awal
+1. Capaian Pembelajaran
+2. Tujuan Pembelajaran
+3. Langkah Pembelajaran
 
-    2. Kegiatan Inti
-        a.	Memahami
-        b.	Mengaplikasi
-        c.	Merefleksi
-        
-    3. Kegiatan Penutup
+D. PENGALAMAN BELAJAR
+1. Kegiatan Awal
+2. Kegiatan Inti
+3. Kegiatan Penutup
 
 E. ASESMEN PEMBELAJARAN
-    1.	Asesmen pada Awal Pembelajaran
-    2.	Asesmen pada Proses Pembelajaran
-    3.	Asesmen pada Akhir Pembelajaran
+1. Asesmen Awal
+2. Asesmen Proses
+3. Asesmen Akhir
 
 F. LAMPIRAN
 LKPD, Rubrik, Instrumen
 """
-        st.text_area("📘 Draft RPP", rpp, height=450)
 
+    st.text_area(
+        "📘 Draft RPP",
+        rpp,
+        height=450
+    )
     if st.button("⬅️ Kembali ke Input"):
         st.session_state.page = "input"
         st.rerun()
