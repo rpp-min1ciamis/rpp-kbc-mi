@@ -1,12 +1,12 @@
+import streamlit as st
+from docx import Document
+
 st.set_page_config(
     page_title="Generator RPP KBC MI",
     page_icon="📘",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-
-import streamlit as st
-from docx import Document
 
 # ==============================
 # SESSION STATE
