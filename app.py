@@ -8,6 +8,63 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.markdown("""
+<style>
+/* Background utama */
+.stApp {
+    background-color: #f4f7f5;
+}
+
+/* Judul utama */
+h1, h2, h3 {
+    color: #0f5132;
+    font-weight: 700;
+}
+
+/* Card putih */
+.block-container {
+    padding-top: 2rem;
+}
+
+/* Form card */
+div[data-testid="stForm"] {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #d1e7dd;
+}
+
+/* Input */
+input, textarea, select {
+    border-radius: 8px !important;
+}
+
+/* Tombol utama */
+.stButton>button {
+    background-color: #198754;
+    color: white;
+    border-radius: 10px;
+    height: 3em;
+    font-weight: bold;
+    border: none;
+}
+
+.stButton>button:hover {
+    background-color: #157347;
+}
+
+/* Success box */
+div[data-testid="stAlert"] {
+    border-radius: 10px;
+}
+
+/* Caption madrasah */
+footer {
+    visibility: hidden;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ==============================
 # SESSION STATE
 # ==============================
