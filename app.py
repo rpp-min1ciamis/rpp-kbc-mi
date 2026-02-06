@@ -111,22 +111,44 @@ A. IDENTITAS
 Nama Madrasah   : {data['nama_madrasah']}
 Mata Pelajaran  : {data['mata_pelajaran']}
 Kelas/Semester  : {data['kelas_semester']}
-Tahun Pelajaran : {data['tahun_pelajaran']}
-
-B. INFORMASI UMUM
 Materi Pokok    : {data['materi_pokok']}
 Alokasi Waktu   : {data['alokasi_waktu']}
+Tahun Pelajaran : {data['tahun_pelajaran']}
 Model Pedagogis : {data['model_pedagogis']}
 
-C. KERANGKA RPP
-{data['kerangka_teks']}
+B. IDENTIFIKASI
+    1.	Kesiapan Murid
+    2.	Dimensi Profil Lulusan (DPL)
+    3.	Topik Kurikulum Berbasis Cinta (KBC)
+    4.	Materi Insersi Kurikulum Berbasis Cinta (KBC)
 
-D. DESAIN PEMBELAJARAN
-Tujuan Pembelajaran :
-Langkah Pembelajaran :
-Asesmen :
+C. DESAIN PEMBELAJARAN
+    1.	Capaian Pembelajaran
+    2.	Lintas Disiplin Ilmu
+    3.	Tujuan Pembelajaran
+    4.	Praktik Pedagogis
+    5.	Kemitraan Pembelajaran
+    6.	Lingkungan Pembelajaran
+    7.	Pemanfaatan Digital
+    
+D. PENGALAMAN BELAJAR
+Langkah-langkah Pembelajaran:
+    Pertemuan Ke-....
+    1. Kegiatan Awal
 
-E. LAMPIRAN
+    2. Kegiatan Inti
+        a.	Memahami
+        b.	Mengaplikasi
+        c.	Merefleksi
+        
+    3. Kegiatan Penutup
+
+E. ASESMEN PEMBELAJARAN
+    1.	Asesmen pada Awal Pembelajaran
+    2.	Asesmen pada Proses Pembelajaran
+    3.	Asesmen pada Akhir Pembelajaran
+
+F. LAMPIRAN
 LKPD, Rubrik, Instrumen
 """
         st.text_area("📘 Draft RPP", rpp, height=450)
