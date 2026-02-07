@@ -204,9 +204,9 @@ elif menu == "➕ Buat RPP Baru":
                     7. PENGESAHAN: Tabel tanda tangan Kepala & Guru dengan NIP.
 
                     8. LAMPIRAN:
-                       - 1. Rubrik Penilaian (Tabel KKTP: Baru Memulai s.d Mahir)
-                       - 2. LKPD (Lembar Kerja Murid sederhana)
-                       - 3. Instrumen Asesmen Akhir (Kisi-kisi & Contoh Soal Pilihan Ganda)
+                       - 1. Rubrik Penilaian (Tabel KKTP: Mulai Berkembang s.d Baik Sekali)
+                       - 2. LKPD (Lembar Kerja Murid Lengkap)
+                       - 3. Instrumen Asesmen Akhir (Kisi-kisi & Contoh Soal Pilihan Ganda 10 nomor)
 
                     HANYA BERIKAN KODE HTML. Jangan ada teks lain.
                     """
