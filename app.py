@@ -49,7 +49,7 @@ if 'config' not in st.session_state:
 with st.sidebar:
     # Menggunakan st.image dengan nama file yang ada di GitHub
     try:
-        st.image("min maparah-ok.png", width=80) # Pastikan nama file ini persis dengan di GitHub
+        st.image("logo kemenag.png", width=80) # Pastikan nama file ini persis dengan di GitHub
     except:
         st.warning("⚠️ File logo tidak ditemukan!")
 
