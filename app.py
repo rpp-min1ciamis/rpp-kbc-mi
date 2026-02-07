@@ -42,7 +42,7 @@ if 'config' not in st.session_state:
         "nip_guru": "NIP Guru",
         "kepala": "Nama Kamad.",
         "nip_kepala": "NIP Kamad",
-        "thn_ajar": "isi tahun ajaran"
+        "thn_ajar": "Tahun ajaran"
     }
 
 # --- SIDEBAR MENU DENGAN LOGO ASLI ---
@@ -119,7 +119,7 @@ elif menu == "➕ Buat RPP Baru":
         ])
     with c_kbc2:
         # UPDATE: DAFTAR DIMENSI PROFIL LULUSAN
-        profil = st.multiselect("Dimensi Profil Lulusan", [
+        profil = st.cek box("Dimensi Profil Lulusan", [
             "Keimanan & Ketakwaan",
             "Kewargaan",
             "Penalaran Kritis",
@@ -128,7 +128,7 @@ elif menu == "➕ Buat RPP Baru":
             "Kemandirian",
             "Kesehatan",
             "Komunikasi"
-        ], default=["Keimanan & Ketakwaan", "Kewargaan"])
+        ], default=["Keimanan & Ketakwaan"])
     
     # UPDATE: DAFTAR TOPIK KBC (PANCA CINTA)
     topik_kbc = st.multiselect("Topik KBC (Panca Cinta)", [
@@ -137,7 +137,7 @@ elif menu == "➕ Buat RPP Baru":
         "Cinta Diri dan Sesama",
         "Cinta Lingkungan",
         "Cinta Tanah Air"
-    ], default=["Cinta Ilmu", "Cinta Lingkungan"])
+    ], default=["Cinta Ilmu"])
 
     # --- TOMBOL EKSEKUSI ---
     if st.button("🚀 GENERATE RPP SESUAI REFERENSI"):
