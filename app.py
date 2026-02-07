@@ -137,7 +137,7 @@ elif menu == "➕ Buat RPP Baru":
         "Cinta Diri dan Sesama",
         "Cinta Lingkungan",
         "Cinta Tanah Air"
-    ], default=["Cinta Ilmu"])
+    ])
 
     # --- TOMBOL EKSEKUSI ---
     if st.button("🚀 GENERATE RPP SESUAI REFERENSI"):
