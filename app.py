@@ -119,7 +119,7 @@ elif menu == "➕ Buat RPP Baru":
         ])
     with c_kbc2:
         # UPDATE: DAFTAR DIMENSI PROFIL LULUSAN
-        profil = st.cek box("Dimensi Profil Lulusan", [
+        profil = st.multiselect("Dimensi Profil Lulusan", [
             "Keimanan & Ketakwaan",
             "Kewargaan",
             "Penalaran Kritis",
