@@ -37,12 +37,12 @@ model_ai = get_model()
 if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     st.session_state.config = {
-        "madrasah": "MIN 1 CIAMIS",
-        "guru": "Agus Arifien, S.Pd.I",
-        "nip_guru": "197710242014121003",
-        "kepala": "Iim Siti Halimah, S.Ag., M.Pd.",
-        "nip_kepala": "197206051997032003",
-        "thn_ajar": "2025/2026"
+        "madrasah": "Nama Madrasah",
+        "guru": "Guru Gaftek",
+        "nip_guru": "NIP Guru",
+        "kepala": "Nama Kamad.",
+        "nip_kepala": "NIP Kamad",
+        "thn_ajar": "isi tahun ajaran"
     }
 
 # --- SIDEBAR MENU DENGAN LOGO ASLI ---
