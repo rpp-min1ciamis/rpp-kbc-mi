@@ -128,7 +128,7 @@ elif menu == "➕ Buat RPP Baru":
             "Kemandirian",
             "Kesehatan",
             "Komunikasi"
-        ], contoh=["Keimanan & Ketakwaan"])
+        ], example=["Keimanan & Ketakwaan"])
     
     # UPDATE: DAFTAR TOPIK KBC (PANCA CINTA)
     topik_kbc = st.multiselect("Topik KBC (Panca Cinta)", [
