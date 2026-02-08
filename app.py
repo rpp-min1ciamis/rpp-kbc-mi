@@ -163,7 +163,7 @@ elif menu == "➕ Buat RPP Baru":
                     STRUKTUR HTML (WAJIB IKUTI URUTAN INI):
                     Gunakan tag table border='1' style='border-collapse:collapse; width:100%; font-family:Times New Roman;'
 
-                    1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi, Nama Madrasah.
+                    1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi.
                     
                     2. A. IDENTITAS MODUL (Tabel):
                        Isi: Madrasah, Guru, Mapel, Kelas/Sem, Materi, Alokasi, Tahun, Model Pedagogis ({model_p}).
@@ -212,6 +212,7 @@ elif menu == "➕ Buat RPP Baru":
                     """
                     
                     # --- GENERATE ---
+                    model_ai = genai.GenerativeModel("gemini-pro")
                     raw_response = model_ai.generate_content(prompt).text
                     html_final = re.sub(r'```html|```', '', raw_response).strip()
                     
