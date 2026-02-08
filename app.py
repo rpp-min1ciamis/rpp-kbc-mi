@@ -211,9 +211,7 @@ elif menu == "➕ Buat RPP Baru":
                     HANYA BERIKAN KODE HTML. Jangan ada teks lain.
                     """
                     
-                    # --- GENERATE ---
-                    model_ai = genai.GenerativeModel("gemini-pro")
-                    
+                    # --- GENERATE ---                  
                     raw_response = model_ai.generate_content(prompt).text
                     html_final = re.sub(r'```html|```', '', raw_response).strip()
                     
