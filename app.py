@@ -190,14 +190,8 @@ elif menu == "➕ Buat RPP Baru":
                        - 1 JP = 35 menit.
                        - Setiap pertemuan dapat terdiri dari jumlah JP yang fleksibel (misalnya 1 JP, 2 JP, 3 JP, atau lebih sesuai kebutuhan materi).
                        - Sesuaikan durasi setiap bagian (Pendahuluan, Inti, Penutup) secara PROPORSIONAL dengan total JP per pertemuan.
-
-                        Contoh penyesuaian waktu (WAJIB DIJADIKAN ACUAN):
-                       - Jika 1 pertemuan = 1 JP (35 menit) → Pendahuluan ~ 5–8 menit, Inti ~ 22–25 menit, Penutup ~ 5 menit.
-                       - Jika 1 pertemuan = 2 JP (70 menit) → Pendahuluan ~ 12–15 menit, Inti ~ 45–50 menit, Penutup ~ 8–10 menit.
-                       - Jika 1 pertemuan = 3 JP (105 menit) → Pendahuluan ~ 18–22 menit, Inti ~ 70–75 menit, Penutup ~ 8–10 menit.
-
+                        
                        Struktur setiap pertemuan WAJIB sebagai berikut:
-
                        - PENDAHULUAN (± 20–25% dari total JP per pertemuan): 
                          Apersepsi, Lagu Nasional/Religi.
 
