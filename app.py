@@ -128,7 +128,7 @@ elif menu == "➕ Buat RPP Baru":
             "Kemandirian",
             "Kesehatan",
             "Komunikasi"
-        ], default=["Keimanan & Ketakwaan"])
+        ])
     
     # UPDATE: DAFTAR TOPIK KBC (PANCA CINTA)
     topik_kbc = st.multiselect("Topik KBC (Panca Cinta)", [
@@ -137,7 +137,7 @@ elif menu == "➕ Buat RPP Baru":
         "Cinta Diri dan Sesama",
         "Cinta Lingkungan",
         "Cinta Tanah Air"
-    ], default=["Cinta Ilmu"])
+    ])
 
     # --- TOMBOL EKSEKUSI ---
     if st.button("🚀 GENERATE RPP SESUAI REFERENSI"):
