@@ -184,20 +184,38 @@ elif menu == "➕ Buat RPP Baru":
                        - 7. Pemanfaatan Digital
 
                     5. D. PENGALAMAN BELAJAR (Deep Learning):
-                       Bagi menjadi Pertemuan 1, 2, 3, dan seterusnya. Setiap pertemuan WAJIB strukturnya:
-                       - PENDAHULUAN (10 Menit): Apersepsi, Lagu Nasional/Religi.
-                       - INTI (50 Menit): Gunakan Sintak {model_p} tapi dikelompokkan dalam 3 Fase Deep Learning:
-                         a. MEMAHAMI (Orientasi, Organisasi)
-                         b. MENGAPLIKASI (Penyelidikan, Pengembangan Karya)
-                         c. MEREFLEKSI (Evaluasi)
-                       
-                       *WAJIB*: Di tengah Kegiatan Inti, sisipkan kode HTML ini persis:
-                       <div style='background-color:#f0fdf4; border-left:5px solid #166534; padding:15px; margin:10px 0;'>
-                         <b>Penguatan Nilai KBC (Panca Cinta):</b>
-                         [Tulis narasi penguatan karakter {', '.join(topik_kbc)} di sini]
-                       </div>
+                       Bagi menjadi Pertemuan 1, 2, 3, dan seterusnya. 
 
-                       - PENUTUP (10 Menit): Refleksi, Doa.
+                       *Catatan alokasi waktu (WAJIB DIPATUHI)*:
+                       - 1 JP = 35 menit.
+                       - Setiap pertemuan dapat terdiri dari jumlah JP yang fleksibel (misalnya 1 JP, 2 JP, 3 JP, atau lebih sesuai kebutuhan materi).
+                       - Sesuaikan durasi setiap bagian (Pendahuluan, Inti, Penutup) secara PROPORSIONAL dengan total JP per pertemuan.
+
+                        Contoh penyesuaian waktu (WAJIB DIJADIKAN ACUAN):
+                       - Jika 1 pertemuan = 1 JP (35 menit) → Pendahuluan ~ 5–8 menit, Inti ~ 22–25 menit, Penutup ~ 5 menit.
+                       - Jika 1 pertemuan = 2 JP (70 menit) → Pendahuluan ~ 12–15 menit, Inti ~ 45–50 menit, Penutup ~ 8–10 menit.
+                       - Jika 1 pertemuan = 3 JP (105 menit) → Pendahuluan ~ 18–22 menit, Inti ~ 70–75 menit, Penutup ~ 8–10 menit.
+
+                       Struktur setiap pertemuan WAJIB sebagai berikut:
+
+                       - PENDAHULUAN (± 20–25% dari total JP per pertemuan): 
+                         Apersepsi, Lagu Nasional/Religi.
+
+                       - INTI (± 65–70% dari total JP per pertemuan): 
+                         Gunakan Sintak {model_p} tetapi dikelompokkan dalam 3 Fase Deep Learning:
+                           a. MEMAHAMI (Orientasi, Organisasi)
+                           b. MENGAPLIKASI (Penyelidikan, Pengembangan Karya)
+                           c. MEREFLEKSI (Evaluasi)
+
+                        *WAJIB*: Di tengah Kegiatan Inti, sisipkan kode HTML ini persis:
+                        <div style='background-color:#f0fdf4; border-left:5px solid #166534; padding:15px; margin:10px 0;'>
+                        <b>Penguatan Nilai KBC (Panca Cinta):</b>
+                        [Tulis narasi penguatan karakter {', '.join(topik_kbc)} di sini]
+                        </div>
+
+                       - PENUTUP (± 10–15% dari total JP per pertemuan): 
+                         Refleksi, Doa.
+
 
                     6. E. ASESMEN (Awal, Proses, Akhir).
 
