@@ -184,7 +184,7 @@ elif menu == "➕ Buat RPP Baru":
                        - 7. Pemanfaatan Digital
 
                     5. D. PENGALAMAN BELAJAR (Deep Learning):
-                       Bagi menjadi Pertemuan 1 & 2. Setiap pertemuan WAJIB strukturnya:
+                       Bagi menjadi Pertemuan 1, 2, 3, dan seterusnya. Setiap pertemuan WAJIB strukturnya:
                        - PENDAHULUAN (10 Menit): Apersepsi, Lagu Nasional/Religi.
                        - INTI (50 Menit): Gunakan Sintak {model_p} tapi dikelompokkan dalam 3 Fase Deep Learning:
                          a. MEMAHAMI (Orientasi, Organisasi)
