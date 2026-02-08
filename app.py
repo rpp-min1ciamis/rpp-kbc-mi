@@ -213,6 +213,7 @@ elif menu == "➕ Buat RPP Baru":
                     
                     # --- GENERATE ---
                     model_ai = genai.GenerativeModel("gemini-pro")
+                    
                     raw_response = model_ai.generate_content(prompt).text
                     html_final = re.sub(r'```html|```', '', raw_response).strip()
                     
