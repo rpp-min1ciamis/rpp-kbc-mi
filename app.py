@@ -40,7 +40,7 @@ if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     # FITUR 4: Tampilan disamarkan (placeholder) dengan nilai awal kosong
     st.session_state.config = {
-        "madrasah": "", "guru": "", "nip_guru": "",
+        "madrasah": "", "guru": "",
         "kepala": "Iim Siti Halimah, S.Ag., M.Pd.",
         "nip_kepala": "197206051997032003", "thn_ajar": ""
     }
@@ -48,7 +48,7 @@ if 'config' not in st.session_state:
 # --- SIDEBAR MENU ---
 with st.sidebar:
     try:
-        st.image("min maparah-ok.png", width=80) 
+         st.image("logo kemenag.png", width=80) 
     except:
         st.warning("⚠️ File logo tidak ditemukan!")
 
