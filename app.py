@@ -12,6 +12,7 @@ def check_password():
             del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
+    
     if "password_correct" not in st.session_state:
         st.markdown("<h2 style='text-align:center;'>🔐 Akses Terbatas Guru</h2>", unsafe_allow_html=True)
         st.text_input("Masukkan Password", type="password", on_change=password_entered, key="password")
@@ -24,11 +25,12 @@ def check_password():
 
 # --- 2. JALANKAN APLIKASI ---
 if check_password():
-    # Semua kode di bawah ini wajib masuk ke kanan (1 kali Tab)
+    # SEMUA KODE DI BAWAH INI WAJIB MASUK KE KANAN (INDENTASI)
     st.set_page_config(page_title="E-Perangkat KBC - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
-    # Inisialisasi Database Kosong (Agar muncul placeholder samar)
-    if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
+    # Inisialisasi Database Kosong
+    if 'db_rpp' not in st.session_state: 
+        st.session_state.db_rpp = []
     if 'config' not in st.session_state:
         st.session_state.config = {"madrasah": "", "guru": "", "nip_guru": "", "kepala": "", "nip_kepala": "", "thn_ajar": ""}
 
@@ -44,7 +46,8 @@ if check_password():
         st.session_state.config['nip_guru'] = st.text_input("NIP Guru", value=st.session_state.config['nip_guru'], placeholder="Masukkan NIP atau '-'")
         st.session_state.config['kepala'] = st.text_input("Nama Kepala", value=st.session_state.config['kepala'], placeholder="Nama Kepala Madrasah")
         st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", value=st.session_state.config['nip_kepala'], placeholder="NIP Kepala Madrasah")
-        if st.button("Simpan Konfigurasi"): st.success("Data berhasil disimpan!")
+        if st.button("Simpan Konfigurasi"): 
+            st.success("Data berhasil disimpan!")
 
     # --- MENU BUAT RPP ---
     elif menu == "➕ Buat RPP Baru":
@@ -72,7 +75,6 @@ if check_password():
             else:
                 with st.spinner("⏳ Menyusun RPP..."):
                     try:
-                        # Logika pembagian JP
                         jp_rata = inp_jp // inp_pt
                         sisa = inp_jp % inp_pt
                         
@@ -100,6 +102,9 @@ if check_password():
 
     # --- MENU RIWAYAT ---
     elif menu == "📜 Riwayat RPP":
+        st.subheader("📜 Riwayat Dokumen")
+        if not st.session_state.db_rpp:
+            st.info("Belum ada dokumen yang dibuat.")
         for item in reversed(st.session_state.db_rpp):
             with st.expander(f"📄 {item['tgl']} - {item['materi']}"):
                 components.html(f"<div style='background:white; color:black; padding:20px;'>{item['file']}</div>", height=500, scrolling=True)
