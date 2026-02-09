@@ -95,7 +95,7 @@ elif menu == "➕ Buat RPP Baru":
     
     c_mapel, c_kls, c_materi, = st.columns(3)
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
-    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=2)
+    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=1)
     with c_materi: materi = st.text_input("Materi Pokok")
         
     st.markdown("<div class='section-header'>PENGATURAN WAKTU</div>", unsafe_allow_html=True)
