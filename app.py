@@ -133,24 +133,37 @@ elif menu == "➕ Buat RPP Baru":
                     
                     DATA IDENTITAS:
                     - Guru: {st.session_state.config['guru']} (NIP: {st.session_state.config['nip_guru']})
-                    - Alokasi: {alokasi_final} (Artinya ada {inp_pertemuan} pertemuan)
+                    - Alokasi Total: {alokasi_final}
+                    - Total JP: {inp_jp} JP
+                    - Jumlah Pertemuan: {inp_pertemuan} Pertemuan
                     
-                    LOGIKA PERTEMUAN:
-                    - Anda HARUS membagi RPP ini menjadi tepat {inp_pertemuan} pertemuan.
-                    - Jika ada 1 pertemuan, buat detail dari Pendahuluan sampai Penutup.
-                    - Jika ada {inp_pertemuan} pertemuan, buat sub-bab 'Pertemuan 1', 'Pertemuan 2', dst.
-                    - Durasi total per pertemuan adalah (Total JP/Total Pertemuan) x {inp_menit} menit.
+                    ATURAN PEMBAGIAN JAM (WAJIB):
+                    Anda harus membagi {inp_jp} JP ke dalam {inp_pertemuan} pertemuan dengan logika:
+                    - Pertemuan 1 s.d {inp_pertemuan - 1} masing-masing: {jp_per_pertemuan + (1 if sisa_jp > 0 else 0)} JP.
+                    - Pertemuan terakhir: {jp_per_pertemuan} JP.
+                    (Contoh: Jika 5 JP 2 Pertemuan, maka Pertemuan 1 = 3 JP, Pertemuan 2 = 2 JP).
+                    (Contoh: Jika 5 JP 3 Pertemuan, maka Pertemuan 1 = 2 JP, Pertemuan 2 = 2 JP, Pertemuan 3 = 1 JP).
+
+                    STRUKTUR ISI PERTEMUAN:
+                    Setiap pertemuan harus memiliki durasi menit yang tepat (JP x {inp_menit} menit).
+                    Gunakan format:
+                    ### Pertemuan 1 (... JP / ... Menit)
+                    - Pendahuluan (Apersepsi & Pemanasan)
+                    - Inti (Fase Memahami, Mengaplikasi, Merefleksi dengan Sintak {model_p})
+                    - Penutup (Refleksi & Doa)
+
+                    Sertakan kode HTML Penguatan Nilai KBC (Panca Cinta) "{', '.join(topik_kbc)}" di setiap kegiatan inti.
 
                     STRUKTUR HTML:
                     1. HEADER: Perencanaan Pembelajaran KBC.
                     2. TABEL IDENTITAS: Madrasah, Guru, Mapel, Kelas, Alokasi ({alokasi_final}).
                     3. IDENTIFIKASI KBC: Profil Lulusan ({', '.join(profil)}), Panca Cinta ({', '.join(topik_kbc)}).
                     4. DESAIN PEMBELAJARAN: TP ({target_belajar}).
-                    5. PENGALAMAN BELAJAR: (Sesuai jumlah {inp_pertemuan} pertemuan). Gunakan fase Memahami, Mengaplikasi, Merefleksi.
+                    5. PENGALAMAN BELAJAR: (Detailkan setiap pertemuan sesuai aturan pembagian jam di atas).
                     6. ASESMEN & PENGESAHAN.
-                    7. LAMPIRAN: LKPD & Instrumen Soal.
+                    7. LAMPIRAN: LKPD & Instrumen Soal (10 Soal PG).
 
-                    HANYA BERIKAN KODE HTML.
+                    HANYA BERIKAN KODE HTML. Jangan ada penjelasan teks di luar tag HTML.
                     """
                     
                     raw_response = model_ai.generate_content(prompt).text
