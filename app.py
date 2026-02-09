@@ -3,6 +3,7 @@ import streamlit.components.v1 as components
 import google.generativeai as genai
 from datetime import date
 import re
+
 # --- SISTEM KEAMANAN LOGIN ---
 def check_password():
     """Returns True if the user had the correct password."""
@@ -33,6 +34,7 @@ if check_password():
     with st.sidebar:
         st.success("✅ Anda berhasil login")
         # ... sisanya kode awal Anda ...
+
 # --- KONFIGURASI HALAMAN & SECURITY ---
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
