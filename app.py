@@ -7,7 +7,7 @@ import re
 # --- KONFIGURASI HALAMAN & SECURITY ---
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
-# CSS TAMPILAN (Sesuai Kode Awal Anda)
+# CSS TAMPILAN (Sesuai Format Awal Anda)
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -63,7 +63,7 @@ with st.sidebar:
     
     menu = st.radio("Menu Utama", ["➕ Buat RPP Baru", "📜 Riwayat RPP", "⚙️ Pengaturan"])
     st.divider()
-    st.caption("v13.13 - Special Fix Time Logic")
+    st.caption("v13.14 - Full Component Fixed")
 
 # --- MENU 1: PENGATURAN ---
 if menu == "⚙️ Pengaturan":
@@ -88,7 +88,6 @@ elif menu == "➕ Buat RPP Baru":
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
     with c_materi: materi = st.text_input("Materi Pokok")
     
-    # BAGIAN PERUBAHAN: INPUT ALOKASI WAKTU OTOMATIS
     st.markdown("<div class='section-header'>PENGATURAN WAKTU & PERTEMUAN</div>", unsafe_allow_html=True)
     ca1, ca2, ca3, ca4 = st.columns(4)
     with ca1: inp_jp = st.number_input("Total JP", min_value=1, value=5)
@@ -96,7 +95,6 @@ elif menu == "➕ Buat RPP Baru":
     with ca3: inp_pertemuan = st.number_input("Jml Pertemuan", min_value=1, value=2)
     with ca4: tgl = st.date_input("Tanggal RPP", date.today())
     
-    # Variabel untuk tampilan alokasi di dokumen
     alokasi_final = f"{inp_jp} x {inp_menit} Menit ({inp_pertemuan} Pertemuan)"
     st.info(f"Format Alokasi di RPP: **{alokasi_final}**")
 
@@ -119,13 +117,12 @@ elif menu == "➕ Buat RPP Baru":
         if not materi or not target_belajar:
             st.warning("Mohon lengkapi Materi dan Tujuan Pembelajaran.")
         else:
-            with st.spinner("⏳ Menghitung durasi dan menyusun struktur KBC..."):
+            with st.spinner("⏳ Menyusun RPP KBC Presisi Lengkap..."):
                 try:
-                    # LOGIKA PEMBAGIAN JP UNTUK AI
+                    # LOGIKA PEMBAGIAN JP
                     jp_rata = inp_jp // inp_pertemuan
                     sisa = inp_jp % inp_pertemuan
                     
-                    # PROMPT ASLI ANDA (Hanya disisipkan logika waktu otomatis)
                     prompt = f"""
                     Berperanlah sebagai Guru Profesional KBC di {st.session_state.config['madrasah']}.
                     Buat RPP HTML lengkap untuk materi "{materi}" ({mapel}) Kelas {kelas}.
@@ -145,21 +142,31 @@ elif menu == "➕ Buat RPP Baru":
                     1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi.
                     2. A. IDENTITAS MODUL (Tabel): Isi: Madrasah, Guru, Mapel, Kelas/Sem, Materi, Alokasi ({alokasi_final}), Tahun, Model ({model_p}).
                     3. B. IDENTIFIKASI & KBC (Tabel & Narasi)
-                    4. C. DESAIN PEMBELAJARAN (Sub-bab)
+                    
+                    4. C. DESAIN PEMBELAJARAN (Sub-bab Wajib Jabarkan Poin Berikut):
+                       - 1. Capaian Pembelajaran (CP)
+                       - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
+                       - 3. Tujuan Pembelajaran (Ambil dari input: {target_belajar})
+                       - 4. Praktik Pedagogis (Peran guru sebagai fasilitator)
+                       - 5. Kemitraan Pembelajaran (Peran orang tua)
+                       - 6. Lingkungan Pembelajaran
+                       - 7. Pemanfaatan Digital
+
                     5. D. PENGALAMAN BELAJAR (Deep Learning):
                        WAJIB bagi materi ini menjadi {inp_pertemuan} pertemuan.
                        LOGIKA PEMBAGIAN JP (WAJIB):
                        - Pertemuan 1 s.d pertemuan {inp_pertemuan-1} = {jp_rata + (1 if sisa > 0 else 0)} JP.
-                       - Pertemuan terakhir (ke-{inp_pertemuan}) = {jp_rata} JP.
-                       (1 JP = {inp_menit} menit).
+                       - Pertemuan terakhir = {jp_rata} JP.
                        
                        Struktur setiap pertemuan:
-                       - PENDAHULUAN (± 20–25% durasi)
-                       - INTI (± 65–70% durasi): 3 Fase Deep Learning (Memahami, Mengaplikasi, Merefleksi).
-                       - SISIHKAN KOTAK PENGUATAN KBC (Warna hijau #f0fdf4) di setiap pertemuan.
-                       - PENUTUP (± 10–15% durasi)
+                       - PENDAHULUAN (Apersepsi, Lagu Nasional/Religi).
+                       - INTI (3 Fase Deep Learning: Memahami, Mengaplikasi, Merefleksi dengan Sintak {model_p}).
+                       - WAJIB SISIHKAN KOTAK PENGUATAN Karakter Panca Cinta ({', '.join(topik_kbc)}).
+                       - PENUTUP (Refleksi, Doa).
 
-                    6. E. ASESMEN, 7. PENGESAHAN, 8. LAMPIRAN (Rubrik, LKPD, 10 Soal PG).
+                    6. E. ASESMEN (Awal, Proses, Akhir).
+                    7. PENGESAHAN (Tabel tanda tangan Kamad & Guru).
+                    8. LAMPIRAN (Rubrik, LKPD, 10 Soal PG).
 
                     HANYA BERIKAN KODE HTML.
                     """
