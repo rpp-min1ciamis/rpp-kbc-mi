@@ -93,11 +93,11 @@ if menu == "⚙️ Pengaturan":
 elif menu == "➕ Buat RPP Baru":
     st.subheader("➕ Rancang RPP KBC Presisi")
     
-    c_mapel, c_materi, c_kls = st.columns(3)
+    c_mapel, c_kls, c_materi, = st.columns(3)
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
+    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=2)
     with c_materi: materi = st.text_input("Materi Pokok")
-    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=3)
-    
+        
     st.markdown("<div class='section-header'>PENGATURAN WAKTU</div>", unsafe_allow_html=True)
     ca1, ca2, ca3, ca4 = st.columns(4)
     with ca1: inp_jp = st.number_input("Total JP", min_value=1, value=5)
@@ -147,13 +147,27 @@ elif menu == "➕ Buat RPP Baru":
                     - Topik KBC: {', '.join(topik_kbc)}
                     
                     STRUKTUR HTML (WAJIB):
-                    1. HEADER & IDENTITAS: Alokasi ({alokasi_final}).
-                    2. B. IDENTIFIKASI KBC.
-                    3. C. DESAIN PEMBELAJARAN:
-                       - Poin 3 (TUJUAN PEMBELAJARAN): Gabungkan narasi "{target_belajar}" dengan "{', '.join(topik_kbc)}" secara otomatis dan harmonis.
-                       - Poin lainnya jabarkan (CP, Lintas Ilmu, Pedagogis, Kemitraan, Lingkungan, Digital).
-                    4. D. PENGALAMAN BELAJAR: {inp_pertemuan} pertemuan. Pembagian JP: P1={jp_rata + (1 if sisa > 0 else 0)}, sisanya {jp_rata}.
-                    5. ASESMEN, PENGESAHAN, LAMPIRAN (LKPD & 10 Soal PG).
+                    1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi.
+                    
+                    2. A. IDENTITAS MODUL (Tabel):
+                       Isi: Madrasah, Guru, Mapel, Kelas/Sem, Materi, Alokasi, Tahun, Model Pedagogis ({model_p}).
+                    
+                    3. B. IDENTIFIKASI & KBC (Tabel & Narasi):
+                       - 1. Kesiapan Murid (Tabel: Kondisi Murid, Materi Prasyarat)
+                       - 2. Dimensi Profil Lulusan (Narasi penerapan poin: {', '.join(profil)})
+                       - 3. Topik KBC (Narasi penerapan poin: {', '.join(topik_kbc)})
+                       - 4. Materi Insersi KBC (Narasi singkat penerapan Panca Cinta di materi ini)
+                    4. C. DESAIN PEMBELAJARAN (Sub-bab):
+                       - 1. Capaian Pembelajaran (CP)
+                       - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
+                       - 3. Tujuan Pembelajaran ( Gabungkan narasi "{target_belajar}" dengan "{', '.join(topik_kbc)}" secara otomatis dan harmonis.})
+                       - 4. Praktik Pedagogis (Peran guru sebagai fasilitator)
+                       - 5. Kemitraan Pembelajaran (Peran orang tua)
+                       - 6. Lingkungan Pembelajaran
+                       - 7. Pemanfaatan Digital
+                                                  
+                    5. D. PENGALAMAN BELAJAR: {inp_pertemuan} pertemuan. Pembagian JP: P1={jp_rata + (1 if sisa > 0 else 0)}, sisanya {jp_rata}.
+                    6. ASESMEN, PENGESAHAN, LAMPIRAN (LKPD & 5 Soal PG).
 
                     HANYA BERIKAN KODE HTML.
                     """
