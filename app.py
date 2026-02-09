@@ -37,12 +37,12 @@ model_ai = get_model()
 if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     st.session_state.config = {
-        "madrasah": "Nama Madrasah",
-        "guru": "Guru Gaftek",
-        "nip_guru": "NIP Guru",
-        "kepala": "Nama Kamad.",
-        "nip_kepala": "NIP Kamad",
-        "thn_ajar": "Tahun ajaran"
+        "madrasah": "",
+        "guru": "",
+        "nip_guru": "",
+        "kepala": "",
+        "nip_kepala": "",
+        "thn_ajar": ""
     }
 
 # --- SIDEBAR MENU ---
