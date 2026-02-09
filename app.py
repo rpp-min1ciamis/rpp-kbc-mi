@@ -105,13 +105,30 @@ elif menu == "➕ Buat RPP Baru":
     st.markdown("<div class='section-header'>KOMPONEN KBC & DEEP LEARNING</div>", unsafe_allow_html=True)
     target_belajar = st.text_area("Tujuan Pembelajaran (TP)", placeholder="Contoh: Melalui observasi, murid dapat...", height=100)
     
-    c_kbc1, c_kbc2 = st.columns(2)
-    with c_kbc1: 
-        model_p = st.selectbox("Model Pembelajaran", ["Problem Based Learning (PBL)", "Project Based Learning (PjBL)", "Literasi, Orientasi, Kolaborasi, Refleksi (LOK-R)", "Inquiry Learning", "Cooperative Learning", "Discovery Learning", "Contextual Teaching and Learning (CTL)"])
-    with c_kbc2:
-        profil = st.multiselect("Dimensi Profil Lulusan", ["Keimanan & Ketakwaan", "Kewargaan", "Penalaran Kritis", "Kreativitas", "Kolaborasi", "Kemandirian", "Kesehatan", "Komunikasi"])
-    
-    topik_kbc = st.multiselect("Topik KBC (Panca Cinta)", ["Cinta kepada Allah/Rasul-Nya", "Cinta Ilmu", "Cinta Diri dan Sesama", "Cinta Lingkungan", "Cinta Tanah Air"])
+    # 1. Pilih Model Pembelajaran Tetap Dropdown agar Ringkas
+    model_p = st.selectbox("Model Pembelajaran", [
+        "Problem Based Learning (PBL)", "Project Based Learning (PjBL)", 
+        "LOK-R", "Inquiry Learning", "Cooperative Learning", 
+        "Discovery Learning", "Contextual Teaching and Learning (CTL)"
+    ])
+
+    # 2. Ganti Dropdown Profil Lulusan Menjadi Checkbox (Dibagi 4 Kolom)
+    st.markdown("<br><b>Pilih Dimensi Profil Lulusan:</b>", unsafe_allow_html=True)
+    list_profil = ["Keimanan & Ketakwaan", "Kewargaan", "Penalaran Kritis", "Kreativitas", "Kolaborasi", "Kemandirian", "Kesehatan", "Komunikasi"]
+    cols_p = st.columns(4)
+    profil = []
+    for i, p in enumerate(list_profil):
+        if cols_p[i % 4].checkbox(p, key=f"p_{p}"):
+            profil.append(p)
+
+    # 3. Ganti Dropdown Topik KBC Menjadi Checkbox (Dibagi 2 Kolom agar Teks Terbaca Jelas)
+    st.markdown("<br><b>Pilih Topik KBC (Panca Cinta):</b>", unsafe_allow_html=True)
+    list_kbc = ["Cinta kepada Allah/Rasul-Nya", "Cinta Ilmu", "Cinta Diri dan Sesama", "Cinta Lingkungan", "Cinta Tanah Air"]
+    cols_k = st.columns(2)
+    topik_kbc = []
+    for i, k in enumerate(list_kbc):
+        if cols_k[i % 2].checkbox(k, key=f"k_{k}"):
+            topik_kbc.append(k)
 
     if st.button("🚀 GENERATE RPP SESUAI REFERENSI"):
         if not materi or not target_belajar:
