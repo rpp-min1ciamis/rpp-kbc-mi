@@ -19,17 +19,22 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- ENGINE AI ---
+# --- ENGINE AI (PERBAIKAN ERROR 404) ---
 def get_model():
     if "GOOGLE_API_KEY" not in st.secrets: return None
     try:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        return genai.GenerativeModel('gemini-1.5-flash')
-    except: return None
+        # Mencari model yang mendukung generateContent secara otomatis
+        for m in genai.list_models():
+            if 'generateContent' in m.supported_generation_methods:
+                return genai.GenerativeModel(m.name)
+        return None
+    except:
+        return None
 
 model_ai = get_model()
 
-# --- DATABASE SEMENTARA (KOSONG UNTUK PLACEHOLDER) ---
+# --- DATABASE SEMENTARA ---
 if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     st.session_state.config = {"madrasah": "", "guru": "", "nip_guru": "", "kepala": "", "nip_kepala": "", "thn_ajar": ""}
@@ -53,7 +58,7 @@ if menu == "⚙️ Pengaturan":
     with c2:
         st.session_state.config['kepala'] = st.text_input("Nama Kepala", value=st.session_state.config['kepala'], placeholder="Nama Kamad")
         st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", value=st.session_state.config['nip_kepala'], placeholder="NIP Kamad")
-    if st.button("Simpan"): st.success("Data Tersimpan!")
+    if st.button("Simpan"): st.success("Data Master Berhasil Disimpan!")
 
 # --- MENU 2: BUAT RPP BARU ---
 elif menu == "➕ Buat RPP Baru":
@@ -85,9 +90,12 @@ elif menu == "➕ Buat RPP Baru":
     topik_sel = [k for i, k in enumerate(list_kbc) if cols_k[i % 2].checkbox(k, key=f"k_{k}")]
 
     if st.button("🚀 GENERATE RPP"):
-        if not materi or not target_belajar: st.warning("Data belum lengkap!")
+        if model_ai is None:
+            st.error("API Key belum terpasang atau tidak valid.")
+        elif not materi or not target_belajar:
+            st.warning("Data materi atau tujuan belum diisi!")
         else:
-            with st.spinner("⏳ Menyusun RPP KBC Presisi..."):
+            with st.spinner("⏳ AI sedang merancang RPP KBC Presisi..."):
                 try:
                     jp_rata = inp_jp // inp_pt
                     sisa = inp_jp % inp_pt
@@ -100,24 +108,29 @@ elif menu == "➕ Buat RPP Baru":
                     B. IDENTIFIKASI: Buat tabel narasi mendalam yang memetakan materi dengan Dimensi Profil ({', '.join(profil_sel)}) 
                        dan Nilai Panca Cinta ({', '.join(topik_sel)}).
                     
-                    C. DESAIN PEMBELAJARAN (Jabarkan 7 Poin): 
+                    C. DESAIN PEMBELAJARAN (Jabarkan 7 Poin detail): 
                        1. CP, 2. Lintas Disiplin, 3. TP (Narasi gabungan "{target_belajar}" & "{', '.join(topik_sel)}"), 
                        4. Pedagogis, 5. Kemitraan, 6. Lingkungan, 7. Digital.
                     
-                    D. PENGALAMAN BELAJAR (Deep Learning): Bagi {inp_pt} pertemuan. 
-                       P1={jp_rata+(1 if sisa>0 else 0)} JP. Gunakan fase: Memahami, Mengaplikasi, Merefleksi.
+                    D. PENGALAMAN BELAJAR (Deep Learning): Bagi menjadi {inp_pt} pertemuan. 
+                       P1={jp_rata+(1 if sisa>0 else 0)} JP. Gunakan alur: Memahami, Mengaplikasi, Merefleksi.
                     
                     E. ASESMEN, F. PENGESAHAN (Ciamis, {tgl_in.strftime('%d %B %Y')}), G. LAMPIRAN (LKPD & 10 Soal PG).
                     """
-                    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
                     res = model_ai.generate_content(prompt).text
                     html_f = re.sub(r'```html|```', '', res).strip()
                     st.session_state.db_rpp.append({"tgl": tgl_in, "materi": materi, "file": html_f})
+                    st.success("RPP Berhasil Dibuat!")
                     components.html(f"<div style='background:white; color:black; padding:30px; border:1px solid #ccc;'>{html_f}</div>", height=800, scrolling=True)
-                except Exception as e: st.error(f"Eror: {e}")
+                    st.download_button("📥 Download Document", html_f, file_name=f"RPP_KBC_{materi}.doc")
+                except Exception as e:
+                    st.error(f"Terjadi kesalahan saat generate: {e}")
 
 # --- MENU 3: RIWAYAT ---
 elif menu == "📜 Riwayat RPP":
+    if not st.session_state.db_rpp:
+        st.info("Belum ada riwayat RPP.")
     for item in reversed(st.session_state.db_rpp):
         with st.expander(f"📄 {item['tgl']} - {item['materi']}"):
             components.html(f"<div style='background:white; color:black; padding:20px;'>{item['file']}</div>", height=500, scrolling=True)
+            st.download_button("Unduh Ulang", item['file'], file_name=f"RPP_Re_{item['materi']}.doc", key=f"re_{item['materi']}")
