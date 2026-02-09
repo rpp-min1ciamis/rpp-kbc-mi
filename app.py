@@ -4,40 +4,8 @@ import google.generativeai as genai
 from datetime import date
 import re
 
-# --- SISTEM KEAMANAN LOGIN ---
-def check_password():
-    """Returns True if the user had the correct password."""
-    def password_entered():
-        if st.session_state["password"] == "MIN1CIAMIS": # GANTI PASSWORD DI SINI
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Hapus password dari memory
-        else:
-            st.session_state["password_correct"] = False
-
-    if "password_correct" not in st.session_state:
-        # Tampilan layar login
-        st.markdown("<h2 style='text-align:center;'>🔐 Akses Terbatas Guru</h2>", unsafe_allow_html=True)
-        st.text_input("Masukkan Password Aplikasi", type="password", on_change=password_entered, key="password")
-        st.info("Silakan hubungi Admin untuk mendapatkan password.")
-        return False
-    elif not st.session_state["password_correct"]:
-        st.error("😕 Password salah. Silakan coba lagi.")
-        st.text_input("Masukkan Password Aplikasi", type="password", on_change=password_entered, key="password")
-        return False
-    else:
-        return True
-
-# --- EKSEKUSI APLIKASI ---
-if check_password():
-    # SEMUA KODE ANDA YANG ADA (Sidebars, Menus, dll) DIMASUKKAN KE DALAM BLOK INI
-    # Contoh:
-    with st.sidebar:
-        st.success("✅ Anda berhasil login")
-        # ... sisanya kode awal Anda ...
-
 # --- KONFIGURASI HALAMAN & SECURITY ---
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
-
 # CSS TAMPILAN (Sesuai Format Awal Anda)
 st.markdown("""
     <style>
