@@ -142,7 +142,11 @@ elif menu == "➕ Buat RPP Baru":
                     1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi.
                     2. A. IDENTITAS MODUL (Tabel): Isi: Madrasah, Guru, Mapel, Kelas/Sem, Materi, Alokasi ({alokasi_final}), Tahun, Model ({model_p}).
                     3. B. IDENTIFIKASI & KBC (Tabel & Narasi)
-                    
+                       - 1. Kesiapan Murid (Tabel: Kondisi Murid, Materi Prasyarat)
+                       - 2. Dimensi Profil Lulusan (Narasi penerapan poin: {', '.join(profil)})
+                       - 3. Topik KBC (Narasi penerapan poin: {', '.join(topik_kbc)})
+                       - 4. Materi Insersi KBC (Narasi singkat penerapan Panca Cinta di materi ini)
+
                     4. C. DESAIN PEMBELAJARAN (Sub-bab Wajib Jabarkan Poin Berikut):
                        - 1. Capaian Pembelajaran (CP)
                        - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
