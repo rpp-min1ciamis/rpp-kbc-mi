@@ -35,12 +35,12 @@ model_ai = get_model()
 if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     st.session_state.config = {
-        "madrasah": "Nama Madrasah",
-        "guru": "Guru Gaftek",
-        "nip_guru": "NIP Guru",
-        "kepala": "Nama Kamad.",
-        "nip_kepala": "NIP Kamad",
-        "thn_ajar": "Tahun ajaran"
+        "madrasah": "",
+        "guru": "",
+        "nip_guru": "",
+        "kepala": "",
+        "nip_kepala": "",
+        "thn_ajar": ""
     }
 
 # --- SIDEBAR ---
@@ -57,17 +57,37 @@ with st.sidebar:
 # --- MENU 1: PENGATURAN ---
 if menu == "⚙️ Pengaturan":
     st.subheader("⚙️ Data Master Madrasah")
-    st.session_state.config['madrasah'] = st.text_input("Nama Madrasah", st.session_state.config['madrasah'])
-    st.session_state.config['thn_ajar'] = st.text_input("Tahun Pelajaran", st.session_state.config['thn_ajar'])
+    st.info("Isi data ini sekali saja. Nanti otomatis masuk ke setiap RPP.")
+    
+    # Menambahkan placeholder agar teks terlihat samar saat kosong
+    st.session_state.config['madrasah'] = st.text_input("Nama Madrasah", 
+        value=st.session_state.config['madrasah'], 
+        placeholder="Masukkan Nama Madrasah (Contoh: MIN 1 CIAMIS)")
+        
+    st.session_state.config['thn_ajar'] = st.text_input("Tahun Pelajaran", 
+        value=st.session_state.config['thn_ajar'], 
+        placeholder="Contoh: 2025/2026")
+    
     c1, c2 = st.columns(2)
     with c1:
-        st.session_state.config['guru'] = st.text_input("Nama Guru", st.session_state.config['guru'])
-        st.session_state.config['nip_guru'] = st.text_input("NIP Guru", st.session_state.config['nip_guru'])
+        st.session_state.config['guru'] = st.text_input("Nama Guru", 
+            value=st.session_state.config['guru'], 
+            placeholder="Masukkan Nama Lengkap & Gelar")
+            
+        st.session_state.config['nip_guru'] = st.text_input("NIP Guru", 
+            value=st.session_state.config['nip_guru'], 
+            placeholder="Masukkan NIP (Gunakan '-' jika tidak ada)")
     with c2:
-        st.session_state.config['kepala'] = st.text_input("Nama Kepala", st.session_state.config['kepala'])
-        st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", st.session_state.config['nip_kepala'])
+        st.session_state.config['kepala'] = st.text_input("Nama Kepala", 
+            value=st.session_state.config['kepala'], 
+            placeholder="Masukkan Nama Kepala Madrasah")
+            
+        st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", 
+            value=st.session_state.config['nip_kepala'], 
+            placeholder="Masukkan NIP Kepala")
+    
     if st.button("Simpan Konfigurasi"):
-        st.success("Data disimpan!")
+        st.success("Data berhasil disimpan!")
 
 # --- MENU 2: BUAT RPP BARU ---
 elif menu == "➕ Buat RPP Baru":
