@@ -168,21 +168,42 @@ elif menu == "➕ Buat RPP Baru":
                        - 7. Pemanfaatan Digital
                                                   
                     5. D. PENGALAMAN BELAJAR: {inp_pertemuan} pertemuan. Pembagian JP: P1={jp_rata + (1 if sisa > 0 else 0)}, sisanya {jp_rata}.
-                    6. ASESMEN, PENGESAHAN, LAMPIRAN (LKPD & 5 Soal PG).
+                    6. E. ASESMEN (Awal, Proses, Akhir).
+                    7. PENGESAHAN: Tabel tanda tangan Kepala & Guru dengan NIP.
+                    8. LAMPIRAN:
+                       - 1. Rubrik Penilaian (Tabel KKTP: Baru Memulai s.d Mahir)
+                       - 2. LKPD (Lembar Kerja Murid sederhana)
+                       - 3. Instrumen Asesmen Akhir (Kisi-kisi & Contoh 5 Soal Pilihan Ganda)
 
-                    HANYA BERIKAN KODE HTML.
+                    HANYA BERIKAN KODE HTML. Jangan ada teks lain.
                     """
+                    
+                    # --- GENERATE ---
                     raw_response = model_ai.generate_content(prompt).text
                     html_final = re.sub(r'```html|```', '', raw_response).strip()
+                    
+                    # Simpan ke Riwayat
                     st.session_state.db_rpp.append({"tgl": tgl, "materi": materi, "file": html_final})
-                    st.success("Berhasil!")
-                    components.html(f"<div style='background:white; color:black; padding:40px; border:1px solid #ccc;'>{html_final}</div>", height=800, scrolling=True)
+                    
+                    st.success("RPP KBC Berhasil Disusun!")
+                    
+                    # --- RENDER HASIL ---
+                    components.html(f"""
+                        <div style="font-family: 'Times New Roman', serif; background-color: white; color: black; padding: 40px; border: 1px solid #ccc;">
+                            {html_final}
+                        </div>
+                    """, height=800, scrolling=True)
+                    
                     st.download_button("📥 Download Dokumen (.doc)", html_final, file_name=f"RPP_{materi}.doc")
+                
                 except Exception as e:
-                    st.error(f"Kesalahan: {e}")
+                    st.error(f"Terjadi kesalahan: {e}")
 
 # --- MENU 3: RIWAYAT ---
 elif menu == "📜 Riwayat RPP":
+    st.subheader("📜 Riwayat Dokumen")
+    if not st.session_state.db_rpp: st.info("Belum ada dokumen yang dibuat.")
     for i, item in enumerate(reversed(st.session_state.db_rpp)):
         with st.expander(f"📄 {item['tgl']} - {item['materi']}"):
-            components.html(f"<div style='background:white; color:black; padding:20px;'>{item['file']}</div>", height=500, scrolling=True)
+            components.html(f"<div style='background:white; color:black; padding:20px; font-family:serif;'>{item['file']}</div>", height=500, scrolling=True)
+            st.download_button("Unduh Ulang", item['file'], file_name="RPP_Re.doc", key=f"re_{i}")
