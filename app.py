@@ -150,7 +150,10 @@ elif menu == "➕ Buat RPP Baru":
                     4. C. DESAIN PEMBELAJARAN (Sub-bab Wajib Jabarkan Poin Berikut):
                        - 1. Capaian Pembelajaran (CP)
                        - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
-                       - 3. Tujuan Pembelajaran (Ambil dari input: {target_belajar})
+                       - 3. Tujuan Pembelajaran
+                            PENTING: Gabungkan secara otomatis antara "{target_belajar}" dengan nilai-nilai dari "{', '.join(topik_kbc)}".
+                            Buatlah narasi yang harmonis.
+                            Contoh: "Murid dapat [Isi TP Dasar] sebagai wujud nyata [Isi Topik KBC]..." atau narasi profesional lainnya.
                        - 4. Praktik Pedagogis (Peran guru sebagai fasilitator)
                        - 5. Kemitraan Pembelajaran (Peran orang tua)
                        - 6. Lingkungan Pembelajaran
