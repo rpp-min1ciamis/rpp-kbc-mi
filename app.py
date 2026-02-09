@@ -48,7 +48,7 @@ if 'config' not in st.session_state:
 # --- SIDEBAR MENU ---
 with st.sidebar:
     try:
-         st.image("logo kemenag.png", width=80) 
+        st.image("min maparah-ok.png", width=80) 
     except:
         st.warning("⚠️ File logo tidak ditemukan!")
 
@@ -183,7 +183,10 @@ elif menu == "➕ Buat RPP Baru":
 
                     7. PENGESAHAN: Tabel tanda tangan di Ciamis, {tgl_rpp.strftime('%d %B %Y')}.
 
-                    8. LAMPIRAN: Rubrik Penilaian, LKPD, Instrumen Asesmen (10 Soal PG).
+                    8. LAMPIRAN: 
+                        - 1. Rubrik Penilaian, 
+                        - 2. Lembar Kerja Peserta Didik (LKPD), Instrumen
+                        - 3. Asesmen (5 Soal PG).
 
                     HANYA BERIKAN KODE HTML.
                     """
