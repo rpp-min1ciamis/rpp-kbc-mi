@@ -157,10 +157,11 @@ elif menu == "➕ Buat RPP Baru":
                        - 2. Dimensi Profil Lulusan (Narasi penerapan poin: {', '.join(profil)})
                        - 3. Topik KBC (Narasi penerapan poin: {', '.join(topik_kbc)})
                        - 4. Materi Insersi KBC (Narasi singkat penerapan Panca Cinta di materi ini)
+                    
                     4. C. DESAIN PEMBELAJARAN (Sub-bab):
                        - 1. Capaian Pembelajaran (CP)
                        - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
-                       - 3. Tujuan Pembelajaran ( Gabungkan narasi "{target_belajar}" dengan "{', '.join(topik_kbc)}" secara otomatis dan harmonis.})
+                       - 3. Tujuan Pembelajaran ( {Gabungkan narasi "{target_belajar}" dengan "{', '.join(topik_kbc)}" secara otomatis dan harmonis.})
                        - 4. Praktik Pedagogis (Peran guru sebagai fasilitator)
                        - 5. Kemitraan Pembelajaran (Peran orang tua)
                        - 6. Lingkungan Pembelajaran
