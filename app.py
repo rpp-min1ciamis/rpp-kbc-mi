@@ -93,9 +93,10 @@ if menu == "⚙️ Pengaturan":
 elif menu == "➕ Buat RPP Baru":
     st.subheader("➕ Rancang RPP KBC Presisi")
     
-    c_mapel, c_materi = st.columns(2)
+    c_mapel, c_materi, c_kls = st.columns(3)
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
     with c_materi: materi = st.text_input("Materi Pokok")
+    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=3)
     
     st.markdown("<div class='section-header'>PENGATURAN WAKTU</div>", unsafe_allow_html=True)
     ca1, ca2, ca3, ca4 = st.columns(4)
