@@ -7,7 +7,7 @@ import re
 # --- KONFIGURASI HALAMAN & SECURITY ---
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
-# CSS TAMPILAN
+# CSS TAMPILAN (Sesuai Format Awal Anda)
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -17,74 +17,69 @@ st.markdown("""
     [data-testid="stSidebar"] * { color: white !important; }
     input { color: #000000 !important; }
     .stTextArea textarea { color: #000000 !important; background-color: #ffffff !important; }
-    .section-header { color: #166534; font-weight: bold; border-left: 5px solid #166534; padding-left: 10px; margin-top: 20px; margin-bottom: 10px; }
+    .section-header { color: #166534; font-weight: bold; border-left: 5px solid #166534; padding-left: 10px; margin-top: 20px; }
+    .sidebar-brand { text-align: center; padding: 10px; border-bottom: 1px solid #ffffff33; margin-bottom: 20px; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- ENGINE AI ---
+# --- ENGINE AI (LOGIKA MODEL OTOMATIS) ---
 def get_model():
     if "GOOGLE_API_KEY" not in st.secrets: return None
     try:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-        return genai.GenerativeModel(models[0]) if models else None
+        for m in genai.list_models():
+            if 'generateContent' in m.supported_generation_methods:
+                return genai.GenerativeModel(m.name)
+        return None
     except: return None
 
 model_ai = get_model()
 
+# --- DATABASE SEMENTARA ---
 if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
+    # FITUR 4: Tampilan disamarkan (placeholder) dengan nilai awal kosong
     st.session_state.config = {
-        "madrasah": "",
-        "guru": "",
-        "nip_guru": "",
-        "kepala": "",
-        "nip_kepala": "",
-        "thn_ajar": ""
+        "madrasah": "", "guru": "", "nip_guru": "",
+        "kepala": "Iim Siti Halimah, S.Ag., M.Pd.",
+        "nip_kepala": "197206051997032003", "thn_ajar": ""
     }
 
-# --- SIDEBAR ---
+# --- SIDEBAR MENU ---
 with st.sidebar:
     try:
-        st.image("logo kemenag.png", width=80) 
+         st.image("logo kemenag.png", width=80) 
     except:
-        st.warning("⚠️ Logo tidak ditemukan!")
-    st.markdown("<h2 style='color: white; text-align:center;'>E-Perangkat KBC</h2>", unsafe_allow_html=True)
+        st.warning("⚠️ File logo tidak ditemukan!")
+
+    st.markdown("""
+    <div style='text-align: center; border-bottom: 1px solid #ffffff33; margin-bottom: 20px; padding-bottom: 10px;'>
+        <h2 style='color: white; margin-top:0px; font-size: 1.5em;'>E-Perangkat KBC Presisi</h2>
+        <p style='font-size:0.85em; font-style:italic; color:#c8e6c9;'>
+        "MIN 1 CIAMIS - Unggul, Maju, Mendunia."
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     menu = st.radio("Menu Utama", ["➕ Buat RPP Baru", "📜 Riwayat RPP", "⚙️ Pengaturan"])
     st.divider()
-    st.caption("v13.16 - Checkbox Interface")
+    st.caption("v13.22 - Full Version Enhanced")
 
-# --- MENU 1: PENGATURAN ---
+# --- MENU 1: PENGATURAN (FITUR 4: PLACEHOLDER SAMAR) ---
 if menu == "⚙️ Pengaturan":
     st.subheader("⚙️ Data Master Madrasah")
     st.info("Isi data ini sekali saja. Nanti otomatis masuk ke setiap RPP.")
     
-    # Menambahkan placeholder agar teks terlihat samar saat kosong
-    st.session_state.config['madrasah'] = st.text_input("Nama Madrasah", 
-        value=st.session_state.config['madrasah'], 
-        placeholder="Masukkan Nama Madrasah (Contoh: MIN 1 CIAMIS)")
-        
-    st.session_state.config['thn_ajar'] = st.text_input("Tahun Pelajaran", 
-        value=st.session_state.config['thn_ajar'], 
-        placeholder="Contoh: 2025/2026")
+    st.session_state.config['madrasah'] = st.text_input("Nama Madrasah", value=st.session_state.config['madrasah'], placeholder="Contoh: MIN 1 CIAMIS")
+    st.session_state.config['thn_ajar'] = st.text_input("Tahun Pelajaran", value=st.session_state.config['thn_ajar'], placeholder="Contoh: 2025/2026")
     
     c1, c2 = st.columns(2)
     with c1:
-        st.session_state.config['guru'] = st.text_input("Nama Guru", 
-            value=st.session_state.config['guru'], 
-            placeholder="Masukkan Nama Lengkap & Gelar")
-            
-        st.session_state.config['nip_guru'] = st.text_input("NIP Guru", 
-            value=st.session_state.config['nip_guru'], 
-            placeholder="Masukkan NIP (Gunakan '-' jika tidak ada)")
+        st.session_state.config['guru'] = st.text_input("Nama Guru", value=st.session_state.config['guru'], placeholder="Nama Lengkap & Gelar")
+        st.session_state.config['nip_guru'] = st.text_input("NIP Guru", value=st.session_state.config['nip_guru'], placeholder="NIP atau '-'")
     with c2:
-        st.session_state.config['kepala'] = st.text_input("Nama Kepala", 
-            value=st.session_state.config['kepala'], 
-            placeholder="Masukkan Nama Kepala Madrasah")
-            
-        st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", 
-            value=st.session_state.config['nip_kepala'], 
-            placeholder="Masukkan NIP Kepala")
+        st.session_state.config['kepala'] = st.text_input("Nama Kepala", value=st.session_state.config['kepala'], placeholder="Nama Kepala Madrasah")
+        st.session_state.config['nip_kepala'] = st.text_input("NIP Kepala", value=st.session_state.config['nip_kepala'], placeholder="NIP Kepala")
     
     if st.button("Simpan Konfigurasi"):
         st.success("Data berhasil disimpan!")
@@ -93,117 +88,116 @@ if menu == "⚙️ Pengaturan":
 elif menu == "➕ Buat RPP Baru":
     st.subheader("➕ Rancang RPP KBC Presisi")
     
-    c_mapel, c_kls, c_materi, = st.columns(3)
+    c_mapel, c_materi = st.columns(2)
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
-    with c_kls: kelas = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=1)
     with c_materi: materi = st.text_input("Materi Pokok")
-        
-    st.markdown("<div class='section-header'>PENGATURAN WAKTU</div>", unsafe_allow_html=True)
+    
+    # FITUR 1: LOGIKA ALOKASI WAKTU TIGA KOLOM
+    st.markdown("<div class='section-header'>WAKTU & PERTEMUAN</div>", unsafe_allow_html=True)
     ca1, ca2, ca3, ca4 = st.columns(4)
-    with ca1: inp_jp = st.number_input("Total JP", min_value=1, value=5)
-    with ca2: inp_menit = st.number_input("Menit/JP", min_value=1, value=35)
-    with ca3: inp_pertemuan = st.number_input("Jml Pertemuan", min_value=1, value=2)
-    with ca4: tgl = st.date_input("Tanggal RPP", date.today())
+    with ca1: inp_jp = st.number_input("Total JP", min_value=1, value=4)
+    with ca2: inp_mnt = st.number_input("Menit/JP", min_value=1, value=35)
+    with ca3: inp_pt = st.number_input("Jml Pertemuan", min_value=1, value=2)
+    with ca4: tgl_rpp = st.date_input("Tanggal RPP", date.today())
     
-    alokasi_final = f"{inp_jp} x {inp_menit} Menit ({inp_pertemuan} Pertemuan)"
-
+    alokasi_final = f"{inp_jp} x {inp_mnt} Menit ({inp_pt} Pertemuan)"
+    
     st.markdown("<div class='section-header'>KOMPONEN KBC & DEEP LEARNING</div>", unsafe_allow_html=True)
-    target_belajar = st.text_area("Tujuan Pembelajaran (TP)", height=100)
+    target_belajar = st.text_area("Tujuan Pembelajaran (TP)", height=100, placeholder="Contoh: Melalui observasi, murid dapat...")
     
-    model_p = st.selectbox("Model Pembelajaran", ["Problem Based Learning (PBL)", "Project Based Learning (PjBL)", "LOK-R", "Inquiry Learning", "Cooperative Learning", "Discovery Learning", "CTL"])
+    # FITUR 2: PERUBAHAN MENJADI CHECKBOX
+    model_p = st.selectbox("Model Pembelajaran", [
+        "Problem Based Learning (PBL)", 
+        "Project Based Learning (PjBL)", 
+        "Literasi, Orientasi, Kolaborasi, Refleksi (LOK-R)",
+        "Inquiry Learning", "Cooperative Learning", "Discovery Learning", "CTL"
+    ])
 
-    # --- MODIFIKASI CHECKBOX DIMENSI PROFIL ---
-    st.markdown("**Pilih Dimensi Profil Lulusan:**")
-    list_profil = ["Keimanan & Ketakwaan", "Kewargaan", "Penalaran Kritis", "Kreativitas", "Kolaborasi", "Kemandirian", "Kesehatan", "Komunikasi"]
+    st.write("<b>Pilih Dimensi Profil Lulusan:</b>", unsafe_allow_html=True)
+    list_p = ["Keimanan & Ketakwaan", "Kewargaan", "Penalaran Kritis", "Kreativitas", "Kolaborasi", "Kemandirian", "Kesehatan", "Komunikasi"]
     cols_p = st.columns(4)
-    profil = []
-    for i, p in enumerate(list_profil):
-        if cols_p[i % 4].checkbox(p, key=f"p_{p}"):
-            profil.append(p)
+    profil_sel = [p for i, p in enumerate(list_p) if cols_p[i % 4].checkbox(p, key=f"p_{p}")]
 
-    # --- MODIFIKASI CHECKBOX TOPIK KBC ---
-    st.markdown("<br>**Pilih Topik KBC (Panca Cinta):**", unsafe_allow_html=True)
+    st.write("<b>Pilih Topik KBC (Panca Cinta):</b>", unsafe_allow_html=True)
     list_kbc = ["Cinta kepada Allah/Rasul-Nya", "Cinta Ilmu", "Cinta Diri dan Sesama", "Cinta Lingkungan", "Cinta Tanah Air"]
-    cols_k = st.columns(3)
-    topik_kbc = []
-    for i, k in enumerate(list_kbc):
-        if cols_k[i % 3].checkbox(k, key=f"k_{k}"):
-            topik_kbc.append(k)
+    cols_k = st.columns(2)
+    topik_sel = [k for i, k in enumerate(list_kbc) if cols_k[i % 2].checkbox(k, key=f"k_{k}")]
 
     if st.button("🚀 GENERATE RPP SESUAI REFERENSI"):
         if not materi or not target_belajar:
-            st.warning("Mohon lengkapi Materi dan TP.")
+            st.warning("Mohon lengkapi Materi dan Tujuan Pembelajaran.")
         else:
-            with st.spinner("⏳ Menghubungkan TP dengan Nilai KBC..."):
+            with st.spinner("⏳ Menyusun RPP KBC Presisi..."):
                 try:
-                    jp_rata = inp_jp // inp_pertemuan
-                    sisa = inp_jp % inp_pertemuan
+                    # Logika Pembagian JP Otomatis
+                    jp_per_pt = inp_jp // inp_pt
+                    sisa_jp = inp_jp % inp_pt
                     
+                    # FITUR 3: INTEGRASI TP DENGAN RUH KBC (MASUK KE PROMPT ASLI)
                     prompt = f"""
                     Berperanlah sebagai Guru Profesional KBC di {st.session_state.config['madrasah']}.
-                    Buat RPP HTML lengkap materi "{materi}" ({mapel}).
+                    Buat RPP HTML lengkap untuk materi "{materi}" ({mapel}).
+                    
+                    DATA INPUT:
+                    - Guru: {st.session_state.config['guru']} (NIP: {st.session_state.config['nip_guru']})
+                    - Kepala: {st.session_state.config['kepala']} (NIP: {st.session_state.config['nip_kepala']})
+                    - Tahun: {st.session_state.config['thn_ajar']}
+                    - Model: {model_p}
+                    - Profil Lulusan: {', '.join(profil_sel)}
+                    - Nilai Panca Cinta: {', '.join(topik_sel)}
 
-                    - Profil Lulusan: {', '.join(profil)}
-                    - Topik KBC: {', '.join(topik_kbc)}
+                    STRUKTUR HTML (WAJIB IKUTI URUTAN INI):
+                    Gunakan tag table border='1' style='border-collapse:collapse; width:100%; font-family:Times New Roman;'
+
+                    1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi, Nama Madrasah.
                     
-                    STRUKTUR HTML (WAJIB):
-                    1. HEADER: Judul PERENCANAAN PEMBELAJARAN KBC, Materi.
-                    
-                    2. A. IDENTITAS MODUL (Tabel):
-                       Isi: Madrasah, Guru, Mapel, Kelas/Sem, Materi, Alokasi, Tahun, Model Pedagogis ({model_p}).
-                    
-                    3. B. IDENTIFIKASI & KBC (Tabel & Narasi):
-                       - 1. Kesiapan Murid (Tabel: Kondisi Murid, Materi Prasyarat)
-                       - 2. Dimensi Profil Lulusan (Narasi penerapan poin: {', '.join(profil)})
-                       - 3. Topik KBC (Narasi penerapan poin: {', '.join(topik_kbc)})
-                       - 4. Materi Insersi KBC (Narasi singkat penerapan Panca Cinta di materi ini)
-                    
-                    4. C. DESAIN PEMBELAJARAN (Sub-bab):
-                       - 1. Capaian Pembelajaran (CP)
-                       - 2. Lintas Disiplin Ilmu (Hubungkan dengan mapel lain)
-                       - 3. Tujuan Pembelajaran ( Gabungkan narasi "{target_belajar}" dengan "{', '.join(topik_kbc)}" secara otomatis dan harmonis.)
-                       - 4. Praktik Pedagogis (Peran guru sebagai fasilitator)
-                       - 5. Kemitraan Pembelajaran (Peran orang tua)
+                    2. A. IDENTITAS MODUL:
+                       Isi: Madrasah, Guru, Mapel, Kelas, Materi, Alokasi ({alokasi_final}), Tahun, Model ({model_p}).
+
+                    3. B. IDENTIFIKASI & KBC:
+                       - 1. Kesiapan Murid
+                       - 2. Dimensi Profil Lulusan ({', '.join(profil_sel)})
+                       - 3. Topik KBC ({', '.join(topik_sel)})
+                       - 4. Materi Insersi KBC
+
+                    4. C. DESAIN PEMBELAJARAN:
+                       - 1. CP
+                       - 2. Lintas Disiplin Ilmu
+                       - 3. Tujuan Pembelajaran: Integrasikan narasi "{target_belajar}" dengan nilai "{', '.join(topik_sel)}" sehingga memuat ruh KBC secara harmonis.
+                       - 4. Praktik Pedagogis
+                       - 5. Kemitraan Pembelajaran
                        - 6. Lingkungan Pembelajaran
                        - 7. Pemanfaatan Digital
-                                                  
-                    5. D. PENGALAMAN BELAJAR: {inp_pertemuan} pertemuan. Pembagian JP: P1={jp_rata + (1 if sisa > 0 else 0)}, sisanya {jp_rata}.
-                    6. E. ASESMEN (Awal, Proses, Akhir).
-                    7. PENGESAHAN: Tabel tanda tangan Kepala & Guru dengan NIP.
-                    8. LAMPIRAN:
-                       - 1. Rubrik Penilaian (Tabel KKTP: Baru Memulai s.d Mahir)
-                       - 2. LKPD (Lembar Kerja Murid sederhana)
-                       - 3. Instrumen Asesmen Akhir (Kisi-kisi & Contoh 5 Soal Pilihan Ganda)
 
-                    HANYA BERIKAN KODE HTML. Jangan ada teks lain.
+                    5. D. PENGALAMAN BELAJAR (Deep Learning):
+                       Bagi menjadi {inp_pt} pertemuan. 
+                       P1 = {jp_per_pt + (1 if sisa_jp > 0 else 0)} JP, sisanya {jp_per_pt} JP.
+                       Setiap pertemuan strukturnya: PENDAHULUAN, INTI (Memahami, Mengaplikasi, Merefleksi), PENUTUP.
+                       
+                       *WAJIB*: Di setiap pertemuan, sisipkan kotak ini:
+                       <div style='background-color:#f0fdf4; border-left:5px solid #166534; padding:15px; margin:10px 0;'>
+                         <b>Penguatan Nilai KBC (Panca Cinta):</b> [Narasi penguatan {', '.join(topik_sel)}]
+                       </div>
+
+                    6. E. ASESMEN.
+
+                    7. PENGESAHAN: Tabel tanda tangan di Ciamis, {tgl_rpp.strftime('%d %B %Y')}.
+
+                    8. LAMPIRAN: Rubrik Penilaian, LKPD, Instrumen Asesmen (10 Soal PG).
+
+                    HANYA BERIKAN KODE HTML.
                     """
-                    
-                    # --- GENERATE ---
                     raw_response = model_ai.generate_content(prompt).text
                     html_final = re.sub(r'```html|```', '', raw_response).strip()
-                    
-                    # Simpan ke Riwayat
-                    st.session_state.db_rpp.append({"tgl": tgl, "materi": materi, "file": html_final})
-                    
-                    st.success("RPP KBC Berhasil Disusun!")
-                    
-                    # --- RENDER HASIL ---
-                    components.html(f"""
-                        <div style="font-family: 'Times New Roman', serif; background-color: white; color: black; padding: 40px; border: 1px solid #ccc;">
-                            {html_final}
-                        </div>
-                    """, height=800, scrolling=True)
-                    
-                    st.download_button("📥 Download Dokumen (.doc)", html_final, file_name=f"RPP_{materi}.doc")
-                
+                    st.session_state.db_rpp.append({"tgl": tgl_rpp, "materi": materi, "file": html_final})
+                    st.success("Selesai!")
+                    components.html(f"<div style='background:white; color:black; padding:30px; border:1px solid #ccc;'>{html_final}</div>", height=800, scrolling=True)
+                    st.download_button("📥 Download Document", html_final, file_name=f"RPP_{materi}.doc")
                 except Exception as e:
-                    st.error(f"Terjadi kesalahan: {e}")
+                    st.error(f"Eror: {e}")
 
 # --- MENU 3: RIWAYAT ---
 elif menu == "📜 Riwayat RPP":
-    st.subheader("📜 Riwayat Dokumen")
-    if not st.session_state.db_rpp: st.info("Belum ada dokumen yang dibuat.")
-    for i, item in enumerate(reversed(st.session_state.db_rpp)):
+    for item in reversed(st.session_state.db_rpp):
         with st.expander(f"📄 {item['tgl']} - {item['materi']}"):
-            components.html(f"<div style='background:white; color:black; padding:20px; font-family:serif;'>{item['file']}</div>", height=500, scrolling=True)
-            st.download_button("Unduh Ulang", item['file'], file_name="RPP_Re.doc", key=f"re_{i}")
+            components.html(f"<div style='background:white; color:black; padding:20px;'>{item['file']}</div>", height=500, scrolling=True)
