@@ -210,7 +210,7 @@ elif menu == "➕ Buat RPP Baru":
 
                     6. E. ASESMEN (Awal, Proses, Akhir).
                     7. PENGESAHAN (Tabel tanda tangan Kamad & Guru).
-                    8. LAMPIRAN (Rubrik, LKPD, 10 Soal PG).
+                    8. LAMPIRAN (Rubrik, LKPD, 5 Soal PG).
 
                     HANYA BERIKAN KODE HTML.
                     """
