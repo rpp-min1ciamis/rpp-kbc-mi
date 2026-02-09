@@ -6,6 +6,7 @@ import re
 
 # --- KONFIGURASI HALAMAN & SECURITY ---
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
+
 # CSS TAMPILAN (Sesuai Format Awal Anda)
 st.markdown("""
     <style>
