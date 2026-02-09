@@ -209,7 +209,10 @@ elif menu == "➕ Buat RPP Baru":
                        - PENUTUP (Refleksi, Doa).
 
                     6. E. ASESMEN (Awal, Proses, Akhir).
-                    7. PENGESAHAN (Tabel tanda tangan Kamad & Guru).
+                    7. PENGESAHAN: 
+                       Buat tabel tanda tangan tanpa border (border:0) yang rapi:
+                       - Kolom kiri (Mengetahui): Jabatan 'Kepala Madrasah', Nama '{st.session_state.config['kepala']}', dan NIP '{st.session_state.config['nip_kepala']}'.
+                       - Kolom kanan (Pembuat): Tempat dan Tanggal 'Ciamis, {tgl.strftime('%d %B %Y')}', Jabatan 'Guru Mata Pelajaran', Nama '{st.session_state.config['guru']}', dan NIP '{st.session_state.config['nip_guru']}'.
                     8. LAMPIRAN (Rubrik, LKPD, 5 Soal PG).
 
                     HANYA BERIKAN KODE HTML.
