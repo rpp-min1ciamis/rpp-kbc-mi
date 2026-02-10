@@ -8,20 +8,20 @@ import re
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
 # CSS TAMPILAN (Sesuai Format Awal Anda)
+st.markdown("""
 <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    [data-testid="stSidebar"] { background-color: #14532d; }
-    [data-testid="stSidebar"] * { color: white !important; }
-    input { color: #000000 !important; }
-    .stTextArea textarea { color: #000000 !important; background-color: #ffffff !important; }
-    .section-header { color: #166534; font-weight: bold; border-left: 5px solid #166534; padding-left: 10px; margin-top: 20px; }
-    .sidebar-brand { text-align: center; padding: 10px; border-bottom: 1px solid #ffffff33; margin-bottom: 20px; }
-    /* Kode untuk menyembunyikan status widget di pojok kiri bawah */
-    [data-testid="stStatusWidget"] { visibility: hidden !important; }
-    </style>
-    """, unsafe_allow_html=True)
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+[data-testid="stSidebar"] { background-color: #14532d; }
+[data-testid="stSidebar"] * { color: white !important; }
+input { color: #000000 !important; }
+.stTextArea textarea { color: #000000 !important; background-color: #ffffff !important; }
+.section-header { color: #166534; font-weight: bold; border-left: 5px solid #166534; padding-left: 10px; margin-top: 20px; }
+.sidebar-brand { text-align: center; padding: 10px; border-bottom: 1px solid #ffffff33; margin-bottom: 20px; }
+[data-testid="stStatusWidget"] { visibility: hidden !important; }
+</style>
+""", unsafe_allow_html=True)
 
 # --- ENGINE AI (LOGIKA MODEL OTOMATIS) ---
 def get_model():
