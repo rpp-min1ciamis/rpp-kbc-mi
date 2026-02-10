@@ -8,8 +8,7 @@ import re
 st.set_page_config(page_title="E-Perangkat KBC Presisi - MIN 1 CIAMIS", layout="wide", page_icon="🏫")
 
 # CSS TAMPILAN (Sesuai Format Awal Anda)
-st.markdown("""
-    <style>
+<style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
@@ -19,6 +18,8 @@ st.markdown("""
     .stTextArea textarea { color: #000000 !important; background-color: #ffffff !important; }
     .section-header { color: #166534; font-weight: bold; border-left: 5px solid #166534; padding-left: 10px; margin-top: 20px; }
     .sidebar-brand { text-align: center; padding: 10px; border-bottom: 1px solid #ffffff33; margin-bottom: 20px; }
+    /* Kode untuk menyembunyikan status widget di pojok kiri bawah */
+    [data-testid="stStatusWidget"] { visibility: hidden !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -40,7 +41,7 @@ if 'db_rpp' not in st.session_state: st.session_state.db_rpp = []
 if 'config' not in st.session_state:
     # FITUR 4: Tampilan disamarkan (placeholder) dengan nilai awal kosong
     st.session_state.config = {
-        "madrasah": "", "guru": "",
+        "madrasah": "", "guru": "", "nip_guru": "",
         "kepala": "Iim Siti Halimah, S.Ag., M.Pd.",
         "nip_kepala": "197206051997032003", "thn_ajar": ""
     }
@@ -48,7 +49,7 @@ if 'config' not in st.session_state:
 # --- SIDEBAR MENU ---
 with st.sidebar:
     try:
-         st.image("logo kemenag.png", width=80) 
+        st.image("logo kemenag.png", width=80) 
     except:
         st.warning("⚠️ File logo tidak ditemukan!")
 
@@ -88,8 +89,10 @@ if menu == "⚙️ Pengaturan":
 elif menu == "➕ Buat RPP Baru":
     st.subheader("➕ Rancang RPP KBC Presisi")
     
-    c_mapel, c_materi = st.columns(2)
+    c_mapel, c_kls, c_sem, c_materi = st.columns(4)
     with c_mapel: mapel = st.text_input("Mata Pelajaran")
+    with c_kls: kls_sel = st.selectbox("Kelas", ["1", "2", "3", "4", "5", "6"], index=3) 
+    with c_sem: sem_sel = st.selectbox("Semester", ["1 (Ganjil)", "2 (Genap)"])
     with c_materi: materi = st.text_input("Materi Pokok")
     
     # FITUR 1: LOGIKA ALOKASI WAKTU TIGA KOLOM
@@ -135,16 +138,21 @@ elif menu == "➕ Buat RPP Baru":
                     
                     # FITUR 3: INTEGRASI TP DENGAN RUH KBC (MASUK KE PROMPT ASLI)
                     prompt = f"""
-                    Berperanlah sebagai Guru Profesional KBC di {st.session_state.config['madrasah']}.
-                    Buat RPP HTML lengkap untuk materi "{materi}" ({mapel}).
-                    
-                    DATA INPUT:
+                    Berperanlah sebagai Guru MI (Madrasah Ibtidaiyah) Profesional. 
+                    WAJIB: Buat RPP untuk KELAS {kls_sel} SEMESTER {sem_sel}.
+                    DILARANG KERAS memberikan Fase D atau Kelas VII.
+
+                    DATA INPUT (GUNAKAN DATA INI SECARA EKSPLISIT):
+                    - Madrasah: {st.session_state.config['madrasah']}
                     - Guru: {st.session_state.config['guru']} (NIP: {st.session_state.config['nip_guru']})
                     - Kepala: {st.session_state.config['kepala']} (NIP: {st.session_state.config['nip_kepala']})
+                    - Kelas: {kls_sel}
+                    - Semester: {sem_sel}
                     - Tahun: {st.session_state.config['thn_ajar']}
                     - Model: {model_p}
                     - Profil Lulusan: {', '.join(profil_sel)}
                     - Nilai Panca Cinta: {', '.join(topik_sel)}
+                    - Tujuan Pembelajaran: {target_belajar}
 
                     STRUKTUR HTML (WAJIB IKUTI URUTAN INI):
                     Gunakan tag table border='1' style='border-collapse:collapse; width:100%; font-family:Times New Roman;'
@@ -183,10 +191,7 @@ elif menu == "➕ Buat RPP Baru":
 
                     7. PENGESAHAN: Tabel tanda tangan di Ciamis, {tgl_rpp.strftime('%d %B %Y')}.
 
-                    8. LAMPIRAN: 
-                        - 1. Rubrik Penilaian, 
-                        - 2. Lembar Kerja Peserta Didik (LKPD), Instrumen
-                        - 3. Asesmen (5 Soal PG).
+                    8. LAMPIRAN: Rubrik Penilaian (holistik dan analitik), LKPD, Instrumen Asesmen (5 Soal PG & Kunci Jawaban).
 
                     HANYA BERIKAN KODE HTML.
                     """
